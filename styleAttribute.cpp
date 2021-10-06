@@ -4,11 +4,18 @@ StyleAttribute::StyleAttribute()
 	isGood = false;
 	isArr = false;
 }
-StyleAttribute::StyleAttribute(int* dat)
+StyleAttribute::~StyleAttribute()
+{
+	if (isGood)
+	{
+		delete[] valueArr;
+	}
+}
+StyleAttribute::StyleAttribute(int* dat,int length)
 {
 	isGood = false;
 	isArr = false;
-	int leng = sizeof(dat) / sizeof(int);
+	int leng = length;
 	for (int x = 0; x < leng; x++)
 	{
 		valueArr[x] = dat[x];
