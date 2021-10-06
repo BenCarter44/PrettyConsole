@@ -27,7 +27,7 @@ public:
 
 	}
 	int getStyle(int i);
-	int getCharacter(int i)
+	char getCharacter(int i)
 	{
 		return rowContent[i];
 	}

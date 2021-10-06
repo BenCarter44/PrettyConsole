@@ -46,7 +46,7 @@ void Console::render()
 	
 	for (int y = 0; y < height;y++)
 	{
-		int previous = 0;
+		int previous = -1000;
 		for (int x = 0; x < width; x++)
 		{
 			if (previous != rows[y].getStyle(x))
@@ -54,7 +54,7 @@ void Console::render()
 				previous = rows[y].getStyle(x);
 				cout << "<" << rows[y].getStyle(x) << ">";
 			}
-			cout << rows[y].getStyle(x);
+			cout << rows[y].getCharacter(x);
 		}
 		cout << '\n';
 	}
