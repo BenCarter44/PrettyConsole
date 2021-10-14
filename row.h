@@ -18,12 +18,7 @@ public:
 	void setLen(int len);
 
 	Row(int len);
-	~Row()
-	{
-			delete[] rowContent;
-			delete[] styles;
-		
-	}
+	~Row();
 	string getStyle(int i);
 	char getCharacter(int i)
 	{

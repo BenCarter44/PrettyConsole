@@ -1,22 +1,27 @@
 #include "styleAttribute.h"
+#include <iostream>
+using namespace std;
+
+int StyleAttribute::testNumber = 0;
+
 StyleAttribute::StyleAttribute()
 {
 	isGood = false;
 	isArr = false;
+	value = 0;
+	valueArr = new int[5];
 }
 StyleAttribute::~StyleAttribute()
 {
-	if (isGood)
-	{
+	//cout << "Problem" << testNumber++;
 		delete[] valueArr;
-	}
 }
 StyleAttribute::StyleAttribute(int* dat,int length)
 {
 	isGood = true;
 	isArr = true;
 	int leng = length;
-	valueArr = new int(length);
+	valueArr = new int[length];
 	for (int x = 0; x < leng; x++)
 	{
 		valueArr[x] = dat[x];
@@ -24,10 +29,11 @@ StyleAttribute::StyleAttribute(int* dat,int length)
 }
 void StyleAttribute::setArr(int* dat, int length)
 {
-	isGood = false;
+	isGood = true;
 	isArr = false;
 	int leng = length;
-	valueArr = new int(length);
+	delete[] valueArr;
+	valueArr = new int[length];
 	for (int x = 0; x < leng; x++)
 	{
 		valueArr[x] = dat[x];
@@ -38,6 +44,7 @@ StyleAttribute::StyleAttribute(int dat)
 	isGood = true;
 	isArr = false;
 	value = dat;
+	valueArr = new int[5];
 }
 void StyleAttribute::setValue(int dat)
 {

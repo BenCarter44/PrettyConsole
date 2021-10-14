@@ -12,7 +12,7 @@ Style::Style()
 	isBlink = StyleAttribute();
 	border = StyleAttribute();
 
-	int dat[16][3] =
+	/*int dat[16][3] =
 	{
 		{1,1,1},
 		{187, 0, 0},
@@ -36,6 +36,7 @@ Style::Style()
 	{
 		defaultColors[i].setArr(dat[i], 3);
 	}
+	*/
 }
 Style::Style(const Style& cp)
 {
@@ -136,11 +137,12 @@ void Style::setTextColor(int r, int g, int b)
 	int dat[] = { r,g,b };
 	textColor.setArr(dat, 3);
 }
+
 void Style::setTextColor(int set)
 {
 	if (set > -1 && set < 16)
 	{
-		textColor = defaultColors[set];
+		//textColor = defaultColors[set];
 	}
 	
 }
@@ -153,7 +155,7 @@ void Style::setBackgroundColor(int set)
 {
 	if (set > -1 && set < 16)
 	{
-		backgroundColor = defaultColors[set];
+		//backgroundColor = defaultColors[set];
 	}
 
 }

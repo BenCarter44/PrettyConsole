@@ -29,7 +29,8 @@ Console::Console()
 	height = w.ws_row;
 	width =  w.ws_col;
 #endif
-
+	//cout << height << '\n';
+	//cout << width << '\n';
 	
 
 	rows = new Row[height];
@@ -37,12 +38,12 @@ Console::Console()
 	resize = false;
 	for (int x = 0; x < height; x++)
 	{
+	//	cout << "X: " << x << '\n';
 		rows[x].setLen(width);
-
+		
 	}
 
-//	cout << height << '\n';
-//	cout << width << '\n';
+	
 
 }
 void Console::render()
@@ -95,4 +96,8 @@ void Console::clear()
 void Console::putString(string data, int x, int y)
 {
 	rows[y].putString(data, x);
+}
+void Console::screenTest()
+{
+	
 }

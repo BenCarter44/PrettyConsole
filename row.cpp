@@ -7,10 +7,18 @@ using namespace std;
 
 Row::Row()
 {
-	rowContent = new unsigned char[10];
-	styles = new Style[10];
+	//rowContent = new unsigned char[10];
+	//styles = new Style[10];
 	width = 0;
 	isProper = false;
+}
+Row::~Row()
+{
+	if (isProper)
+	{
+		delete[] rowContent;
+		delete[] styles;
+	}
 }
 Row::Row(int len)
 {
@@ -21,20 +29,29 @@ Row::Row(int len)
 	{
 		rowContent[x] = ' ';
 		styles[x] = Style();
+		
 	}
 	width = len;
 }
 void Row::setLen(int len)
 {
+	if (isProper)
+	{
+		delete[] rowContent;
+		//cout << "PROBLEM!";
+		delete[] styles;
+		//cout << "ANSWER!"<<len;
+
+	}
 	isProper = true;
 	rowContent = new unsigned char[len];
 	styles = new Style[len];
 	for (int x = 0; x < len; x++)
 	{
 		rowContent[x] = ' ';
-		styles[x] = Style();
 	}
 	width = len;
+
 }
 string Row::getStyle(int i)
 {

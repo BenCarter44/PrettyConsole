@@ -20,7 +20,7 @@ public:
 	bool isSet();
 	int getValue();
 	int* getValueArr();
-
+	static int testNumber;
 
 };
 
