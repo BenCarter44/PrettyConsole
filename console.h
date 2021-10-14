@@ -28,7 +28,7 @@ public:
 	Console();
 	void fillScreen();
 	void clear();
-	
+	void putString(string data, int x, int y);
 
 
 };

@@ -20,12 +20,9 @@ public:
 	Row(int len);
 	~Row()
 	{
-		if (isProper)
-		{
 			delete[] rowContent;
 			delete[] styles;
-		}
-
+		
 	}
 	string getStyle(int i);
 	char getCharacter(int i)
@@ -33,6 +30,7 @@ public:
 		return rowContent[i];
 	}
 	void spaceFill();
+	void putString(string s, int start);
 };
 
 #endif

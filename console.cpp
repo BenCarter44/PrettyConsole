@@ -41,8 +41,8 @@ Console::Console()
 
 	}
 
-	cout << height << '\n';
-	cout << width << '\n';
+//	cout << height << '\n';
+//	cout << width << '\n';
 
 }
 void Console::render()
@@ -62,7 +62,11 @@ void Console::render()
 			}*/
 			cout << rows[y].getCharacter(x);
 		}
-		cout << '\n';
+		if (y < height - 1)
+		{
+			cout << '\n';
+		}
+		//cout << '\n';
 	}
 	
 
@@ -87,4 +91,8 @@ void Console::clear()
 	}
 	
 
+}
+void Console::putString(string data, int x, int y)
+{
+	rows[y].putString(data, x);
 }

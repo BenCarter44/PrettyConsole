@@ -7,10 +7,15 @@ using namespace std;
 
 int main()
 {
-	cout << "Hello CMake!!!." << endl;
+//	cout << "Hello CMake!!!." << endl;
 	Console c = Console();
-	c.fillScreen();
+	c.clear();
+	c.putString("Testing", 0, 0);
+	c.putString("Testing", 0, 0);
 	c.render();
+	int dump;
+	cin >> dump;
 	return 0;
 }
+
 
