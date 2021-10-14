@@ -10,7 +10,7 @@ int main()
 	cout << "Hello CMake!!!." << endl;
 	Console c = Console();
 	c.fillScreen();
-	//c.render();
+	c.render();
 	return 0;
 }
 

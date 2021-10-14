@@ -23,6 +23,7 @@ Row::Row(int len)
 }
 void Row::setLen(int len)
 {
+	isProper = true;
 	rowContent = new unsigned char[len];
 	styles = new Style[len];
 	for (int x = 0; x < len; x++)
@@ -41,6 +42,6 @@ void Row::spaceFill()
 	//cout << width;
 	for (int x = 0; x < width; x++)
 	{
-		rowContent[x] = '-';
+		rowContent[x] = ' ';
 	}
 }

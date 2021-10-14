@@ -17,6 +17,8 @@ Console::Console()
 
 	height = r;
 	width = columns;
+	//height -= 2;
+	//width -= 2;
 
 #else
 
@@ -28,6 +30,7 @@ Console::Console()
 	width =  w.ws_col;
 #endif
 
+	
 
 	rows = new Row[height];
 
@@ -37,13 +40,14 @@ Console::Console()
 		rows[x].setLen(width);
 
 	}
+
 	cout << height << '\n';
 	cout << width << '\n';
 
 }
 void Console::render()
 {
-	cout << rows[0].getCharacter(0);
+	//cout << rows[0].getCharacter(0);
 
 	
 	for (int y = 0; y < height;y++)
@@ -51,11 +55,11 @@ void Console::render()
 		string previous = "";
 		for (int x = 0; x < width; x++)
 		{
-			if (previous == rows[y].getStyle(x) )
+			/*if (previous == rows[y].getStyle(x))
 			{
 				previous = rows[y].getStyle(x);
 				cout << rows[y].getStyle(x);
-			}
+			}*/
 			cout << rows[y].getCharacter(x);
 		}
 		cout << '\n';
@@ -65,7 +69,7 @@ void Console::render()
 }
 void Console::fillScreen()
 {
-	cout << height;
+//	cout << height;
 	
 	for (int y = 0; y < height;y++)
 	{
