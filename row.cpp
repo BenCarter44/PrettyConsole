@@ -1,6 +1,8 @@
 
 #include "Row.h"
+#include "styles.h"
 #include <iostream>
+
 using namespace std;
 
 Row::Row()
@@ -11,28 +13,28 @@ Row::Row(int len)
 {
 	isProper = true;
 	rowContent = new unsigned char[len];
-	styles = new int[len];
+	styles = new Style[len];
 	for (int x = 0; x < len; x++)
 	{
 		rowContent[x] = ' ';
-		styles[x] = 0;
+		styles[x] = Style();
 	}
 	width = len;
 }
 void Row::setLen(int len)
 {
 	rowContent = new unsigned char[len];
-	styles = new int[len];
+	styles = new Style[len];
 	for (int x = 0; x < len; x++)
 	{
 		rowContent[x] = ' ';
-		styles[x] = 0;
+		styles[x] = Style();
 	}
 	width = len;
 }
-int Row::getStyle(int i)
+string Row::getStyle(int i)
 {
-	return styles[i];
+	return styles[i].getASCII();
 }
 void Row::spaceFill()
 {

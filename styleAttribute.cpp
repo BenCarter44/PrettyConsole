@@ -13,9 +13,21 @@ StyleAttribute::~StyleAttribute()
 }
 StyleAttribute::StyleAttribute(int* dat,int length)
 {
+	isGood = true;
+	isArr = true;
+	int leng = length;
+	valueArr = new int(length);
+	for (int x = 0; x < leng; x++)
+	{
+		valueArr[x] = dat[x];
+	}
+}
+void StyleAttribute::setArr(int* dat, int length)
+{
 	isGood = false;
 	isArr = false;
 	int leng = length;
+	valueArr = new int(length);
 	for (int x = 0; x < leng; x++)
 	{
 		valueArr[x] = dat[x];
@@ -27,10 +39,16 @@ StyleAttribute::StyleAttribute(int dat)
 	isArr = false;
 	value = dat;
 }
+void StyleAttribute::setValue(int dat)
+{
+	isGood = true;
+	isArr = false;
+	value = dat;
+}
 
 bool StyleAttribute::isSet()
 {
-	return isSet;
+	return isGood;
 }
 int StyleAttribute::getValue()
 {

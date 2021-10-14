@@ -1,5 +1,6 @@
 #ifndef ROW_H
 #define ROW_H
+#include "styles.h"
 
 using namespace std;
 
@@ -7,7 +8,7 @@ class Row
 {
 private:
 	unsigned char* rowContent; // same as byte
-	int* styles;
+	Style* styles;
 	int width = 0;
 	bool isProper = false;
 
@@ -26,7 +27,7 @@ public:
 		}
 
 	}
-	int getStyle(int i);
+	string getStyle(int i);
 	char getCharacter(int i)
 	{
 		return rowContent[i];

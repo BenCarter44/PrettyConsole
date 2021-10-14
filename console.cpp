@@ -37,6 +37,8 @@ Console::Console()
 		rows[x].setLen(width);
 
 	}
+	cout << height << '\n';
+	cout << width << '\n';
 
 }
 void Console::render()
@@ -46,13 +48,13 @@ void Console::render()
 	
 	for (int y = 0; y < height;y++)
 	{
-		int previous = -1000;
+		string previous = "";
 		for (int x = 0; x < width; x++)
 		{
-			if (previous != rows[y].getStyle(x))
+			if (previous == rows[y].getStyle(x) )
 			{
 				previous = rows[y].getStyle(x);
-				cout << "<" << rows[y].getStyle(x) << ">";
+				cout << rows[y].getStyle(x);
 			}
 			cout << rows[y].getCharacter(x);
 		}
