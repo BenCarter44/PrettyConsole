@@ -26,6 +26,8 @@ public:
 	}
 	void spaceFill();
 	void putString(string s, int start);
+	void setStyle(int i, Style s);
+	void setRowStyle(Style s);
 };
 
 #endif

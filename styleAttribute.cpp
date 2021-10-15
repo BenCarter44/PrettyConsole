@@ -6,19 +6,27 @@ int StyleAttribute::testNumber = 0;
 
 StyleAttribute::StyleAttribute()
 {
+	testID = testNumber;
+	//cout << "Creating " << testID << endl;
 	isGood = false;
 	isArr = false;
 	value = 0;
 	valueArr = new int[5];
+	testNumber++;
 }
 StyleAttribute::~StyleAttribute()
 {
-	//cout << "Problem" << testNumber++;
+	//cout << "Problem" << testID << " " << isDestroyed << endl;
+	if (!isDestroyed)
+	{
 		delete[] valueArr;
+	}
+	isDestroyed = true;
 }
 StyleAttribute::StyleAttribute(int* dat,int length)
 {
 	isGood = true;
+	value = 0;
 	isArr = true;
 	int leng = length;
 	valueArr = new int[length];

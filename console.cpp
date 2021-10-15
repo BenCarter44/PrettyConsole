@@ -99,5 +99,15 @@ void Console::putString(string data, int x, int y)
 }
 void Console::screenTest()
 {
-	
+	int t = 0;
+	for (int r = 0; r < height; r++)
+	{
+		rows[r].spaceFill();
+
+		Style newStyle = Style();
+		
+		t = (r * 3) % 255;
+		newStyle.setBackgroundColor(t, 10, 255);
+		rows[r].setRowStyle(newStyle);
+	}
 }

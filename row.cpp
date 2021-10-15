@@ -57,6 +57,17 @@ string Row::getStyle(int i)
 {
 	return styles[i].getASCII();
 }
+void Row::setStyle(int i,Style s)
+{
+	styles[i] = s;
+}
+void Row::setRowStyle(Style s)
+{
+	for (int x = 0; x < width; x++)
+	{
+		styles[x] = s;
+	}
+}
 void Row::spaceFill()
 {
 	//cout << width;

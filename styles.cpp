@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include "styles.h"
 
 using namespace std;
@@ -6,14 +7,19 @@ using namespace std;
 Style::Style()
 {
 	reset = true;
-	textColor = StyleAttribute();
-	textWeight = StyleAttribute();
-	backgroundColor = StyleAttribute();
-	isBlink = StyleAttribute();
-	border = StyleAttribute();
-
-	/*int dat[16][3] =
+	//textColor = StyleAttribute();
+//	cout << "APPLE!\n";
+	//textWeight = StyleAttribute();
+//	cout << "apple2!\n";
+	//backgroundColor = StyleAttribute();
+	//cout << "apple3!\n";
+	//isBlink = StyleAttribute();
+	//cout << "apple6!\n";
+	//border = StyleAttribute();
+	//cout << "HERE!\n";
+	int dat[16][3] =
 	{
+
 		{1,1,1},
 		{187, 0, 0},
 		{0, 187, 0},
@@ -36,7 +42,7 @@ Style::Style()
 	{
 		defaultColors[i].setArr(dat[i], 3);
 	}
-	*/
+	
 }
 Style::Style(const Style& cp)
 {

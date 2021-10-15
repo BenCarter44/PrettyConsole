@@ -29,7 +29,7 @@ public:
 	void fillScreen();
 	void clear();
 	void putString(string data, int x, int y);
-
+	void screenTest();
 
 };
 #endif

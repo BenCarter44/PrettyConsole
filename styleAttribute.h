@@ -10,6 +10,8 @@ private:
 	int value;
 	int* valueArr;
 	bool isArr;
+	int testID;
+	bool isDestroyed = false;
 public:
 	StyleAttribute();
 	~StyleAttribute();

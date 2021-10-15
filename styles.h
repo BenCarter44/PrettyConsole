@@ -16,12 +16,15 @@ private:
 	StyleAttribute isBlink;
 	StyleAttribute border;
 	bool reset = true;
-	//StyleAttribute defaultColors[16];
-
+	StyleAttribute defaultColors[16];
+	
 public:
 	Style();
 	Style(const Style& cp);
-	
+	~Style()
+	{
+		
+	}
 	string getASCII();
 	void setTextColor(int r, int g, int b);
 	void setTextColor(int set);
