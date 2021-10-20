@@ -12,6 +12,11 @@ Row::Row()
 	width = 0;
 	isProper = false;
 }
+void Row::init()
+{
+	width = 0;
+	isProper = false;
+}
 Row::~Row()
 {
 	if (isProper)
@@ -33,6 +38,25 @@ Row::Row(int len)
 	}
 	width = len;
 }
+void Row::init(int len)
+{
+	if (isProper)
+	{
+		delete[] rowContent;
+		delete[] styles;
+	}
+	isProper = true;
+	rowContent = new unsigned char[len];
+	styles = new Style[len];
+	for (int x = 0; x < len; x++)
+	{
+		rowContent[x] = ' ';
+		styles[x] = Style();
+
+	}
+	width = len;
+}
+
 void Row::setLen(int len)
 {
 	if (isProper)
@@ -55,6 +79,7 @@ void Row::setLen(int len)
 }
 string Row::getStyle(int i)
 {
+
 	return styles[i].getASCII();
 }
 void Row::setStyle(int i,Style s)
@@ -65,7 +90,7 @@ void Row::setRowStyle(Style s)
 {
 	for (int x = 0; x < width; x++)
 	{
-		styles[x] = s;
+		styles[x].init(s);
 	}
 }
 void Row::spaceFill()

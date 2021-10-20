@@ -15,9 +15,11 @@ private:
 
 public:
 	Row();
+	void init();
 	void setLen(int len);
 
 	Row(int len);
+	void init(int len);
 	~Row();
 	string getStyle(int i);
 	char getCharacter(int i)

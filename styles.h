@@ -20,7 +20,10 @@ private:
 	
 public:
 	Style();
+	void init();
 	Style(const Style& cp);
+	void init(const Style& cp);
+
 	~Style()
 	{
 		

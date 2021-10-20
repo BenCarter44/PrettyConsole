@@ -10,18 +10,21 @@ private:
 	int value;
 	int* valueArr;
 	bool isArr;
-	int testID;
-	bool isDestroyed = false;
+	//int testID;
+
 public:
 	StyleAttribute();
+	void init();
 	~StyleAttribute();
 	StyleAttribute(int dat);
+	void init(int dat);
 	StyleAttribute(int* dat,int length);
+	void init(int* dat, int length);
 	void setArr(int* dat, int length);
 	void setValue(int dat);
-	bool isSet();
-	int getValue();
-	int* getValueArr();
+	bool isSet() const;
+	int getValue() const;
+	int* getValueArr() const;
 	static int testNumber;
 
 };

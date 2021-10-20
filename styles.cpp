@@ -4,18 +4,36 @@
 
 using namespace std;
 
+void Style::init()
+{
+	reset = true;
+	textColor.init();
+	//	cout << "APPLE!\n";
+	// 
+	textWeight.init();
+	//	cout << "apple2!\n";
+	backgroundColor.init();
+	//cout << "apple3!\n";
+	isBlink.init();
+	//cout << "apple6!\n";
+	border.init();
+}
+
 Style::Style()
 {
 	reset = true;
-	//textColor = StyleAttribute();
+
+	
+	textColor.init();
 //	cout << "APPLE!\n";
-	//textWeight = StyleAttribute();
+// 
+	textWeight.init();
 //	cout << "apple2!\n";
-	//backgroundColor = StyleAttribute();
+	backgroundColor.init();
 	//cout << "apple3!\n";
-	//isBlink = StyleAttribute();
+	isBlink.init();
 	//cout << "apple6!\n";
-	//border = StyleAttribute();
+	border.init();
 	//cout << "HERE!\n";
 	int dat[16][3] =
 	{
@@ -40,22 +58,43 @@ Style::Style()
 	 // putty constants
 	for (int i = 0; i < 16; i++)
 	{
-		defaultColors[i].setArr(dat[i], 3);
+		defaultColors[i].init(dat[i], 3);
 	}
 	
 }
-Style::Style(const Style& cp)
+void Style::init(const Style& cp)
 {
 	reset = cp.reset;
-	textColor = cp.textColor;
-	textWeight = cp.textWeight;
-	backgroundColor = cp.backgroundColor;
-	isBlink = cp.isBlink;
-	border = cp.border;
+	if (cp.textColor.isSet())
+	{
+		textColor.init(cp.textColor.getValue());
+	}
+	if (cp.textWeight.isSet())
+	{
+		textWeight.init(cp.textWeight.getValue());
+	}
+	if (cp.backgroundColor.isSet())
+	{
+		backgroundColor.init(cp.backgroundColor.getValueArr(), 3);
+	}
+	if (cp.isBlink.isSet())
+	{
+		isBlink.init(cp.isBlink.getValue());
+	}
+	if (cp.border.isSet())
+	{
+		border.init(cp.border.getValue());
+	}
+	
+
+}
+Style::Style(const Style& cp)
+{
+	init(cp);
 }
 string Style::getASCII()
 {
-	string start = "\033[";
+	string start = "\\033[";
 	if (reset)
 	{
 		start += "0;";
@@ -135,58 +174,69 @@ string Style::getASCII()
 		start += "48;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + ";";
 	}
 	start = start.substr(0, start.length() - 1) + "m";
+	//cout << start << '\n';
 	return start;
 
 }
 void Style::setTextColor(int r, int g, int b)
 {
+	reset = false;
 	int dat[] = { r,g,b };
 	textColor.setArr(dat, 3);
 }
 
 void Style::setTextColor(int set)
 {
+	reset = false;
 	if (set > -1 && set < 16)
 	{
-		//textColor = defaultColors[set];
+		textColor = defaultColors[set];
 	}
 	
 }
 void Style::setBackgroundColor(int r, int g, int b)
 {
+	reset = false;
 	int dat[] = { r,g,b };
 	backgroundColor.setArr(dat, 3);
 }
 void Style::setBackgroundColor(int set)
 {
+	reset = false;
 	if (set > -1 && set < 16)
 	{
-		//backgroundColor = defaultColors[set];
+		backgroundColor = defaultColors[set];
 	}
 
 }
 void Style::turnOnBlink()
 {
+	reset = false;
 	isBlink.setValue(1);
 }
 void Style::turnOffBlink()
 {
+	reset = false;
 	isBlink.setValue(0);
 }
 void Style::turnOnFastBlink()
 {
+	reset = false;
 	isBlink.setValue(2);
 }
 void Style::setBorderBox()
 {
+	reset = false;
 	border.setValue(1);
 }
 void Style::setBorderCircle()
 {
+	reset = false;
 	border.setValue(2);
 }
 void Style::noBorder()
 {
+	reset = false;
 	border.setValue(0);
 }
 bool Style::isEqual(Style& cp)

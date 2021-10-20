@@ -4,8 +4,12 @@ using namespace std;
 
 Console::Console()
 {
+	init();
+}
+void Console::init()
+{
 	// get size of window
-	
+
 #ifndef LINUX
 
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -27,40 +31,41 @@ Console::Console()
 	ioctl(0, TIOCGWINSZ, &w);
 
 	height = w.ws_row;
-	width =  w.ws_col;
+	width = w.ws_col;
 #endif
 	//cout << height << '\n';
 	//cout << width << '\n';
-	
+
 
 	rows = new Row[height];
 
 	resize = false;
 	for (int x = 0; x < height; x++)
 	{
-	//	cout << "X: " << x << '\n';
+		//	cout << "X: " << x << '\n';
 		rows[x].setLen(width);
-		
+
 	}
 
-	
+
 
 }
 void Console::render()
 {
 	//cout << rows[0].getCharacter(0);
 
-	
+
 	for (int y = 0; y < height;y++)
 	{
 		string previous = "";
 		for (int x = 0; x < width; x++)
 		{
-			/*if (previous == rows[y].getStyle(x))
+			
+			if (previous == rows[y].getStyle(x))
 			{
 				previous = rows[y].getStyle(x);
-				cout << rows[y].getStyle(x);
-			}*/
+				cout << previous;
+			}
 			cout << rows[y].getCharacter(x);
 		}
 		if (y < height - 1)
@@ -69,9 +74,11 @@ void Console::render()
 		}
 		//cout << '\n';
 	}
-	
+
 
 }
+
+
 void Console::fillScreen()
 {
 //	cout << height;

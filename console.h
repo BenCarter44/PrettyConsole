@@ -26,6 +26,7 @@ private:
 public:
 	void render();
 	Console();
+	void init();
 	void fillScreen();
 	void clear();
 	void putString(string data, int x, int y);

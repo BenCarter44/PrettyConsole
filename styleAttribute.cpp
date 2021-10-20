@@ -2,26 +2,37 @@
 #include <iostream>
 using namespace std;
 
-int StyleAttribute::testNumber = 0;
+//int StyleAttribute::testNumber = 0;
 
-StyleAttribute::StyleAttribute()
+
+void StyleAttribute::init()
 {
-	testID = testNumber;
-	//cout << "Creating " << testID << endl;
-	isGood = false;
-	isArr = false;
-	value = 0;
-	valueArr = new int[5];
-	testNumber++;
-}
-StyleAttribute::~StyleAttribute()
-{
-	//cout << "Problem" << testID << " " << isDestroyed << endl;
-	if (!isDestroyed)
+	if (isGood && isArr)
 	{
 		delete[] valueArr;
 	}
-	isDestroyed = true;
+	isGood = false;
+	isArr = false;
+	value = 0;
+	valueArr = NULL;
+}
+
+
+StyleAttribute::StyleAttribute()
+{
+	isGood = false;
+	isArr = false;
+	value = 0;
+	valueArr = NULL;
+	
+}
+StyleAttribute::~StyleAttribute()
+{
+	if (isGood && isArr)
+	{
+		delete[] valueArr;
+		isGood = false;
+	}
 }
 StyleAttribute::StyleAttribute(int* dat,int length)
 {
@@ -35,12 +46,22 @@ StyleAttribute::StyleAttribute(int* dat,int length)
 		valueArr[x] = dat[x];
 	}
 }
+void StyleAttribute::init(int* dat, int length)
+{
+
+	setArr(dat, length);
+}
+
 void StyleAttribute::setArr(int* dat, int length)
 {
+	if (isGood && isArr)
+	{
+		delete[] valueArr;
+	}
 	isGood = true;
-	isArr = false;
+	isArr = true;
 	int leng = length;
-	delete[] valueArr;
+
 	valueArr = new int[length];
 	for (int x = 0; x < leng; x++)
 	{
@@ -54,6 +75,17 @@ StyleAttribute::StyleAttribute(int dat)
 	value = dat;
 	valueArr = new int[5];
 }
+void StyleAttribute::init(int dat)
+{
+	if (isGood && isArr)
+	{
+		delete[] valueArr;
+	}
+	isGood = true;
+	isArr = false;
+	value = dat;
+	valueArr = new int[5];
+}
 void StyleAttribute::setValue(int dat)
 {
 	isGood = true;
@@ -61,11 +93,11 @@ void StyleAttribute::setValue(int dat)
 	value = dat;
 }
 
-bool StyleAttribute::isSet()
+bool StyleAttribute::isSet() const
 {
 	return isGood;
 }
-int StyleAttribute::getValue()
+int StyleAttribute::getValue() const
 {
 	if (isGood)
 	{
@@ -76,7 +108,7 @@ int StyleAttribute::getValue()
 		return INVALID_STYLE;
 	}
 }
-int* StyleAttribute::getValueArr()
+int* StyleAttribute::getValueArr() const
 {
 	if (isGood)
 	{
