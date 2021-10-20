@@ -50,31 +50,45 @@ void Console::init()
 
 
 }
-void Console::render()
+string Console::stringRender()
 {
-	//cout << rows[0].getCharacter(0);
-
-
+	string out;
 	for (int y = 0; y < height;y++)
 	{
 		string previous = "";
+
 		for (int x = 0; x < width; x++)
 		{
-			
-			if (previous == rows[y].getStyle(x))
+
+			if (previous != rows[y].getStyle(x))
 			{
 				previous = rows[y].getStyle(x);
-				cout << previous;
+				out += previous;
 			}
-			cout << rows[y].getCharacter(x);
+			out += rows[y].getCharacter(x);
 		}
 		if (y < height - 1)
 		{
-			cout << '\n';
+			out += '\n';
 		}
 		//cout << '\n';
 	}
+	return out;
+}
+void Console::render()
+{
+	//cout << rows[0].getCharacter(0);
+	
+	//cout << "\033[2J"; // clears the whole screen and sets cursor to (0,0) \\033[<L>;<C>H
+	cout << "\033[<0>;<0>H";
 
+	cout << stringRender();
+
+
+
+}
+void Console::smartRender()
+{
 
 }
 
@@ -109,12 +123,29 @@ void Console::screenTest()
 	int t = 0;
 	for (int r = 0; r < height; r++)
 	{
+		
 		rows[r].spaceFill();
+
+		int a = mapValue(r, 0, height, 0, 255);
 
 		Style newStyle = Style();
 		
 		t = (r * 3) % 255;
-		newStyle.setBackgroundColor(t, 10, 255);
+		newStyle.setBackgroundColor(a, 10, 255);
+		
 		rows[r].setRowStyle(newStyle);
 	}
+}
+int Console::getHeight() const
+{
+	return height;
+}
+int Console::getWidth() const
+{
+	return width;
+}
+
+int mapValue(int x, int in_min, int in_max, int out_min, int out_max) 
+{
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

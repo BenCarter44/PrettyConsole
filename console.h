@@ -31,6 +31,12 @@ public:
 	void clear();
 	void putString(string data, int x, int y);
 	void screenTest();
-
+	string stringRender();
+	int getWidth() const;
+	int getHeight() const;
+	void smartRender();
 };
+
+int mapValue(int x, int in_min, int in_max, int out_min, int out_max);
+
 #endif

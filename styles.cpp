@@ -94,7 +94,7 @@ Style::Style(const Style& cp)
 }
 string Style::getASCII()
 {
-	string start = "\\033[";
+	string start = "\033[";
 	if (reset)
 	{
 		start += "0;";
