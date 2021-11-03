@@ -84,7 +84,7 @@ string Row::getStyle(int i)
 }
 void Row::setStyle(int i,Style s)
 {
-	styles[i] = s;
+	styles[i].init(s);
 }
 void Row::setRowStyle(Style s)
 {
@@ -110,5 +110,17 @@ void Row::putString(string s, int start)
 	for (int x = 0; x < s.length(); x++)
 	{
 		rowContent[x + start] = s.at(x);
+	}
+}
+void Row::putString(string s, int start, Style sty)
+{
+	if (start + s.length() > width)
+	{
+		s = s.substr(0, width - start);
+	}
+	for (int x = 0; x < s.length(); x++)
+	{
+		rowContent[x + start] = s.at(x);
+		styles[x + start].init(sty);
 	}
 }

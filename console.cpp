@@ -21,8 +21,7 @@ void Console::init()
 
 	height = r;
 	width = columns;
-	//height -= 2;
-	//width -= 2;
+	
 
 #else
 
@@ -35,7 +34,8 @@ void Console::init()
 #endif
 	//cout << height << '\n';
 	//cout << width << '\n';
-
+	//height -= 1;
+	//width -= 1;
 
 	rows = new Row[height];
 
@@ -59,7 +59,7 @@ string Console::stringRender()
 
 		for (int x = 0; x < width; x++)
 		{
-
+			
 			if (previous != rows[y].getStyle(x))
 			{
 				previous = rows[y].getStyle(x);
@@ -67,11 +67,16 @@ string Console::stringRender()
 			}
 			out += rows[y].getCharacter(x);
 		}
+		//cout << out.length() << '\n';
 		if (y < height - 1)
 		{
 			out += '\n';
+			//cout << "\033[<" << (y + 1) << ">;<0>H";
+			//cout << out;
+			//cout << '\n';
+			//out = "";
 		}
-		//cout << '\n';
+		
 	}
 	return out;
 }
@@ -81,8 +86,8 @@ void Console::render()
 	
 	//cout << "\033[2J"; // clears the whole screen and sets cursor to (0,0) \\033[<L>;<C>H
 	cout << "\033[<0>;<0>H";
-
-	cout << stringRender();
+	cout << stringRender(); // << '\f' << endl; //flush;
+	//cout << 
 
 
 
@@ -118,6 +123,10 @@ void Console::putString(string data, int x, int y)
 {
 	rows[y].putString(data, x);
 }
+void Console::putString(string data, int x, int y,Style s)
+{
+	rows[y].putString(data, x, s);
+}
 void Console::screenTest()
 {
 	int t = 0;
@@ -129,10 +138,11 @@ void Console::screenTest()
 		int a = mapValue(r, 0, height, 0, 255);
 
 		Style newStyle = Style();
-		
-		t = (r * 3) % 255;
+	
 		newStyle.setBackgroundColor(a, 10, 255);
-		
+		newStyle.setTextColor(255, 255, 255);
+		//newStyle.setBackgroundColor(mapValue(r, 0, height, 0, 16));
+		//cout << a << '\n';
 		rows[r].setRowStyle(newStyle);
 	}
 }
@@ -143,9 +153,4 @@ int Console::getHeight() const
 int Console::getWidth() const
 {
 	return width;
-}
-
-int mapValue(int x, int in_min, int in_max, int out_min, int out_max) 
-{
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

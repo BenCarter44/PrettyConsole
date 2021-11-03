@@ -30,13 +30,18 @@ public:
 	void fillScreen();
 	void clear();
 	void putString(string data, int x, int y);
+	void putString(string data, int x, int y, Style s);
 	void screenTest();
 	string stringRender();
 	int getWidth() const;
 	int getHeight() const;
 	void smartRender();
+	static int mapValue(int x, int in_min, int in_max, int out_min, int out_max)
+	{
+		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+	}
 };
 
-int mapValue(int x, int in_min, int in_max, int out_min, int out_max);
+
 
 #endif
