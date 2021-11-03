@@ -14,6 +14,8 @@ private:
 
 public:
 	StyleAttribute();
+	void init(const StyleAttribute& sty,int length);
+
 	void init();
 	~StyleAttribute();
 	StyleAttribute(int dat);
@@ -23,8 +25,10 @@ public:
 	void setArr(int* dat, int length);
 	void setValue(int dat);
 	bool isSet() const;
+	bool isArrOK() const;
 	int getValue() const;
 	int* getValueArr() const;
+
 	static int testNumber;
 
 };

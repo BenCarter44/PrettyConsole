@@ -54,9 +54,14 @@ void StyleAttribute::init(int* dat, int length)
 
 void StyleAttribute::setArr(int* dat, int length)
 {
+
+	/*cout << isGood << endl;
+	cout << isArr << endl; */
 	if (isGood && isArr)
 	{
+		//cout << "HERE!";
 		delete[] valueArr;
+
 	}
 	isGood = true;
 	isArr = true;
@@ -66,6 +71,7 @@ void StyleAttribute::setArr(int* dat, int length)
 	for (int x = 0; x < leng; x++)
 	{
 		valueArr[x] = dat[x];
+		
 	}
 }
 StyleAttribute::StyleAttribute(int dat)
@@ -74,6 +80,40 @@ StyleAttribute::StyleAttribute(int dat)
 	isArr = false;
 	value = dat;
 	valueArr = new int[5];
+}
+void StyleAttribute::init(const StyleAttribute& sty,int length)
+{
+/*	cout << sty.isGood << endl;
+	cout << sty.isArr << endl;
+	cout << isGood << endl;
+	cout << isArr << endl; */
+	if (isGood && isArr)
+	{
+		delete[] valueArr;
+		isGood = false;
+	}
+	
+	isGood = sty.isSet();
+	isArr = sty.isArr;
+	/*cout << isGood << endl;
+	cout << isArr << endl;
+	*/
+	//cout << "Receive: \n";
+	//cout << isGood << endl;
+	//cout << isArr << endl;
+	if (isGood && isArr)
+	{
+		valueArr = new int[length];
+		int leng = length;
+		for (int x = 0; x < leng; x++)
+		{
+			valueArr[x] = sty.valueArr[x];
+			//cout << valueArr[x] << endl;
+		}
+	}
+	//cout << "End Receive \n";
+	value = sty.value;
+
 }
 void StyleAttribute::init(int dat)
 {
@@ -97,6 +137,10 @@ bool StyleAttribute::isSet() const
 {
 	return isGood;
 }
+bool StyleAttribute::isArrOK() const
+{
+	return isGood && isArr;
+}
 int StyleAttribute::getValue() const
 {
 	if (isGood)
@@ -110,7 +154,7 @@ int StyleAttribute::getValue() const
 }
 int* StyleAttribute::getValueArr() const
 {
-	if (isGood)
+	if (isGood && isArr)
 	{
 		return valueArr;
 	}

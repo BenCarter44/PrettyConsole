@@ -65,15 +65,15 @@ Style::Style()
 void Style::init(const Style& cp)
 {
 	reset = cp.reset;
-	if (cp.textColor.isSet())
+	if (cp.textColor.isArrOK())
 	{
-		textColor.init(cp.textColor.getValue());
+		textColor.init(cp.textColor.getValueArr(),3);
 	}
 	if (cp.textWeight.isSet())
 	{
 		textWeight.init(cp.textWeight.getValue());
 	}
-	if (cp.backgroundColor.isSet())
+	if (cp.backgroundColor.isArrOK())
 	{
 		backgroundColor.init(cp.backgroundColor.getValueArr(), 3);
 	}
@@ -159,14 +159,16 @@ string Style::getASCII()
 			start += "54;";
 		}
 	}
-	if (textColor.isSet())
+	if (textColor.isArrOK())
 	{
+		
 		int r = textColor.getValueArr()[0];
 		int g = textColor.getValueArr()[1];
 		int b = textColor.getValueArr()[2];
+		/*cout << r << " " << g << " " << b << '\n';*/
 		start += "38;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + ";";
 	}
-	if (backgroundColor.isSet())
+	if (backgroundColor.isArrOK())
 	{
 		int r = backgroundColor.getValueArr()[0];
 		int g = backgroundColor.getValueArr()[1];
@@ -182,7 +184,7 @@ void Style::setTextColor(int r, int g, int b)
 {
 	reset = false;
 	int dat[] = { r,g,b };
-	textColor.setArr(dat, 3);
+	textColor.init(dat, 3);
 }
 
 void Style::setTextColor(int set)
@@ -190,7 +192,11 @@ void Style::setTextColor(int set)
 	reset = false;
 	if (set > -1 && set < 16)
 	{
-		textColor = defaultColors[set];
+		/*for (int x = 0; x < 3; x++)
+		{
+			cout << defaultColors[set].getValueArr()[x] << endl;
+		}*/
+		textColor.init(defaultColors[set],3);
 	}
 	
 }
@@ -198,14 +204,15 @@ void Style::setBackgroundColor(int r, int g, int b)
 {
 	reset = false;
 	int dat[] = { r,g,b };
-	backgroundColor.setArr(dat, 3);
+	backgroundColor.init(dat, 3);
 }
 void Style::setBackgroundColor(int set)
 {
+	//cout << set;
 	reset = false;
 	if (set > -1 && set < 16)
 	{
-		backgroundColor = defaultColors[set];
+		backgroundColor.init(defaultColors[set],3);
 	}
 
 }
