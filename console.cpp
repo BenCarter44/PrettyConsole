@@ -34,7 +34,7 @@ void Console::init()
 #endif
 	//cout << height << '\n';
 	//cout << width << '\n';
-	//height -= 1;
+	height += 0;
 	//width -= 1;
 
 	rows = new Row[height];
@@ -67,6 +67,7 @@ string Console::stringRender()
 			}
 			out += rows[y].getCharacter(x);
 		}
+		rows[y].setRender(true);
 		//cout << out.length() << '\n';
 		if (y < height - 1)
 		{
@@ -80,20 +81,47 @@ string Console::stringRender()
 	}
 	return out;
 }
-void Console::render()
+void Console::render() // redo the entire screen
 {
 	//cout << rows[0].getCharacter(0);
 	
 	//cout << "\033[2J"; // clears the whole screen and sets cursor to (0,0) \\033[<L>;<C>H
-	cout << "\033[<0>;<0>H";
-	cout << stringRender(); // << '\f' << endl; //flush;
+	cout << "\033[0;0f";
+	cout << stringRender(); 
 	//cout << 
-
-
-
+	/*
+	for (int y = 0; y < height; y++)
+	{
+		cout << rows[y].getRenderState();
+	}
+	cout <<  '\n'; */
 }
 void Console::smartRender()
 {
+	/*for (int y = 0; y < height; y++)
+	{
+		cout << rows[y].getRenderState();
+	}
+	cout << '\n';*/
+	// only render the specific line that needs revision.
+	//int count = 0;
+	for (int y = 0; y < height; y++)
+	{
+		if (!rows[y].getRenderState())
+		{
+			/*cout << y << '\n';
+			if (count < height - 1)
+			{
+				putString(to_string(y), 0, count + 1);
+			}
+			count++;*/
+			rows[y].renderLine();
+			string s = "\033[" + to_string(y+1) + ";0f";
+
+			cout << s << rows[y].getRenderResult();
+		}
+		
+	}
 
 }
 
@@ -122,6 +150,10 @@ void Console::clear()
 void Console::putString(string data, int x, int y)
 {
 	rows[y].putString(data, x);
+	/*if (y < height - 1)
+	{
+		cout << "H: " << rows[y + 1].getRenderState();
+	} */
 }
 void Console::putString(string data, int x, int y,Style s)
 {

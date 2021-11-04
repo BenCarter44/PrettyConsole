@@ -11,13 +11,16 @@ private:
 	Style* styles;
 	int width = 0;
 	bool isProper = false;
-
+	bool isRender = false;
+	
+	string renderString = "";
 
 public:
+	void renderLine();
 	Row();
 	void init();
 	void setLen(int len);
-
+	
 	Row(int len);
 	void init(int len);
 	~Row();
@@ -31,6 +34,10 @@ public:
 	void putString(string s, int start, Style sty);
 	void setStyle(int i, Style s);
 	void setRowStyle(Style s);
+	void setRender(bool r);
+	bool getRenderState();
+	string getRenderResult();
+
 };
 
 #endif

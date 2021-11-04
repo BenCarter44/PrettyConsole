@@ -1,12 +1,14 @@
 
-#include "Row.h"
+#include "row.h"
 #include "styles.h"
 #include <iostream>
+
 
 using namespace std;
 
 Row::Row()
 {
+	isRender = false;
 	//rowContent = new unsigned char[10];
 	//styles = new Style[10];
 	width = 0;
@@ -14,6 +16,7 @@ Row::Row()
 }
 void Row::init()
 {
+	isRender = false;
 	width = 0;
 	isProper = false;
 }
@@ -27,6 +30,7 @@ Row::~Row()
 }
 Row::Row(int len)
 {
+	isRender = false;
 	isProper = true;
 	rowContent = new unsigned char[len];
 	styles = new Style[len];
@@ -40,6 +44,7 @@ Row::Row(int len)
 }
 void Row::init(int len)
 {
+	isRender = false;
 	if (isProper)
 	{
 		delete[] rowContent;
@@ -59,6 +64,7 @@ void Row::init(int len)
 
 void Row::setLen(int len)
 {
+	isRender = false;
 	if (isProper)
 	{
 		delete[] rowContent;
@@ -84,10 +90,12 @@ string Row::getStyle(int i)
 }
 void Row::setStyle(int i,Style s)
 {
+	isRender = false;
 	styles[i].init(s);
 }
 void Row::setRowStyle(Style s)
 {
+	isRender = false;
 	for (int x = 0; x < width; x++)
 	{
 		styles[x].init(s);
@@ -95,6 +103,7 @@ void Row::setRowStyle(Style s)
 }
 void Row::spaceFill()
 {
+	isRender = false;
 	//cout << width;
 	for (int x = 0; x < width; x++)
 	{
@@ -103,6 +112,7 @@ void Row::spaceFill()
 }
 void Row::putString(string s, int start)
 {
+	isRender = false;
 	if (start + s.length() > width)
 	{
 		s = s.substr(0, width - start);
@@ -114,6 +124,7 @@ void Row::putString(string s, int start)
 }
 void Row::putString(string s, int start, Style sty)
 {
+	isRender = false;
 	if (start + s.length() > width)
 	{
 		s = s.substr(0, width - start);
@@ -123,4 +134,36 @@ void Row::putString(string s, int start, Style sty)
 		rowContent[x + start] = s.at(x);
 		styles[x + start].init(sty);
 	}
+}
+void Row::renderLine()
+{
+	isRender = true;
+	string out = "";
+	string previous = "";
+
+	for (int x = 0; x < width; x++)
+	{
+
+		if (previous != styles[x].getASCII())
+		{
+			previous = styles[x].getASCII();
+			out += previous;
+		}
+		out += rowContent[x];
+	}
+	renderString = out;
+
+}
+void Row::setRender(bool r)
+{
+	isRender = r;
+}
+bool Row::getRenderState()
+{
+	return isRender;
+}
+string Row::getRenderResult()
+{
+	
+	return renderString;
 }
