@@ -104,6 +104,7 @@ bool ScreenComponent::getAffected(int x, int y)
 	{
 		return affected[y][x];
 	}
+	return 0;
 }
 Style* ScreenComponent::getStyleSpecific(int x, int y)
 {
@@ -111,6 +112,8 @@ Style* ScreenComponent::getStyleSpecific(int x, int y)
 	{
 		return &(styles[y][x]);
 	}
+	Style s = Style();
+	return &s;
 }
 unsigned char ScreenComponent::getChar(int x, int y)
 {
@@ -118,4 +121,5 @@ unsigned char ScreenComponent::getChar(int x, int y)
 	{
 		return rowContent[y][x];
 	}
+	return '#';
 }
