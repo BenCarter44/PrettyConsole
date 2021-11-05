@@ -186,3 +186,22 @@ int Console::getWidth() const
 {
 	return width;
 }
+void Console::addShape(ScreenComponent* sc)
+{
+	int sx = sc->getAnchorX();
+	int sy = sc->getAnchorY();
+	int lenX = sc->getWidth();
+	int lenY = sc->getHeight();
+
+	for (int countY = 0; countY < lenY; countY++)
+	{
+		for (int countX = 0; countX < lenX; countX++)
+		{
+			if (sc->getAffected(countX, countY))
+			{
+				rows[countY + sy].setChar(sc->getChar(countX, countY),countX+sx);
+				rows[countY + sy].setStyle(*(sc->getStyleSpecific(countX, countY)), countX + sx);
+			}
+		}
+	}
+}

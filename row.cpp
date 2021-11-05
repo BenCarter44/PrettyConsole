@@ -167,3 +167,19 @@ string Row::getRenderResult()
 	
 	return renderString;
 }
+void Row::setChar(unsigned char c, int i)
+{
+	if (i < width && i > 0)
+	{
+		isRender = false;
+		rowContent[i] = c;
+	}
+}
+void Row::setStyle(Style& s, int i)
+{
+	if (i < width && i > 0)
+	{
+		isRender = false;
+		styles[i].init(s);
+	}
+}

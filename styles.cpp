@@ -64,6 +64,16 @@ Style::Style()
 }
 void Style::init(const Style& cp)
 {
+	textColor.init();
+	//	cout << "APPLE!\n";
+	// 
+	textWeight.init();
+	//	cout << "apple2!\n";
+	backgroundColor.init();
+	//cout << "apple3!\n";
+	isBlink.init();
+	//cout << "apple6!\n";
+	border.init();
 	reset = cp.reset;
 	if (cp.textColor.isArrOK())
 	{
@@ -92,7 +102,7 @@ Style::Style(const Style& cp)
 {
 	init(cp);
 }
-string Style::getASCII()
+string Style::getASCII() const
 {
 	string start = "\033[";
 	if (reset)
@@ -246,8 +256,36 @@ void Style::noBorder()
 	reset = false;
 	border.setValue(0);
 }
-bool Style::isEqual(Style& cp)
+bool Style::isEqual(const Style& cp)
 {
 	return cp.getASCII() == getASCII();
+
+}
+void Style::mergeStyles(const Style& cp)
+{
+	if (!cp.reset)
+	{
+		if (cp.textColor.isArrOK())
+		{
+			textColor.init(cp.textColor.getValueArr(), 3);
+		}
+		if (cp.textWeight.isSet())
+		{
+			textWeight.init(cp.textWeight.getValue());
+		}
+		if (cp.backgroundColor.isArrOK())
+		{
+			backgroundColor.init(cp.backgroundColor.getValueArr(), 3);
+		}
+		if (cp.isBlink.isSet())
+		{
+			isBlink.init(cp.isBlink.getValue());
+		}
+		if (cp.border.isSet())
+		{
+			border.init(cp.border.getValue());
+		}
+	}
+	
 
 }

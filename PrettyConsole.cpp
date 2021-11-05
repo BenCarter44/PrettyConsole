@@ -3,6 +3,7 @@
 
 #include "PrettyConsole.h"
 #include "console.h"
+#include "rectangle.h"
 
 #include <chrono>
 #include <thread>// sleep!
@@ -18,7 +19,7 @@ int main()
 	using namespace std::chrono; 
 //	cout << "Hello CMake!!!." << endl;
 
-	sleep_for(milliseconds(5000));
+	//
 	Console c = Console();
 
 	/*int height = c.getHeight();
@@ -39,37 +40,22 @@ int main()
 	c.clear();
 	c.screenTest();
 	c.render();
-	//sleep_for(milliseconds(1000));
-	unsigned long startF = duration_cast<microseconds>(system_clock::now().time_since_epoch()).count();
-	unsigned long stopF = startF;
+	sleep_for(milliseconds(1000));
+	Rectangle2D* rc = new Rectangle2D(1,1,20,4);
+	Style newStyle = Style();
+	newStyle.setBackgroundColor(0, 0, 0);
+	rc->setFill(newStyle, false);
+	c.addShape(rc);
+	c.smartRender();
+	sleep_for(milliseconds(1000));
+	Rectangle2D* rc2 = new Rectangle2D(15, 3, 35, 4);
+	newStyle.init();
+	newStyle.setBackgroundColor(255, 255, 255);
+	rc2->setFill(newStyle, false);
+	c.addShape(rc2);
 
-	for (int r = 0; r < c.getHeight(); r++)
-	{
-		for (int x = 0; x < c.getWidth(); x++)
-		{
-			Style colorText = Style();
-			//colorText.init();
-			int a = Console::mapValue(r, 0, c.getHeight(), 0, 16);
-
-			colorText.setTextColor(a);
-			colorText.setBackgroundColor(a, 10, 255);
-			c.putString(" Testing", x, r, colorText);
-			c.putString(" END", 0, c.getHeight() - 1, colorText);
-			//string a = c.stringRender();
-			//cout << a;
-			//cout << "\033[<0>;<0>H";
-			
-			c.smartRender();
-			stopF = duration_cast<microseconds>(system_clock::now().time_since_epoch()).count();
-			double fps = 1000000 / (stopF - startF);
-			c.putString("   " + to_string(fps) + "  ", 0, 5);
-			c.putString("      " + to_string(stopF - startF) + "     ", 0, 7);
-			//sleep_for(milliseconds(10));
-			startF = duration_cast<microseconds>(system_clock::now().time_since_epoch()).count();
-		}
-	}
-	
-	
+	c.smartRender();
+	getchar();
 
 	return 0;
 	

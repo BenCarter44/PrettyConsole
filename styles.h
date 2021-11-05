@@ -28,7 +28,7 @@ public:
 	{
 		
 	}
-	string getASCII();
+	string getASCII() const;
 	void setTextColor(int r, int g, int b);
 	void setTextColor(int set);
 	void setBackgroundColor(int r, int g, int b);
@@ -39,7 +39,8 @@ public:
 	void setBorderBox();
 	void noBorder();
 	void setBorderCircle();
-	bool isEqual(Style& cp);
+	bool isEqual(const Style& cp);
+	void mergeStyles(const Style& cp);
 	
 
 };

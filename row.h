@@ -36,6 +36,8 @@ public:
 	void setRowStyle(Style s);
 	void setRender(bool r);
 	bool getRenderState();
+	void setChar(unsigned char c, int i);
+	void setStyle(Style& s, int i);
 	string getRenderResult();
 
 };
