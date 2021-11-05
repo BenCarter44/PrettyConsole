@@ -1,3 +1,4 @@
 # PrettyConsole
 
-This is a fun Readme file!
+All about making a nice shell system
+
