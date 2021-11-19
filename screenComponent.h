@@ -32,9 +32,9 @@ protected:
 public:
 	ScreenComponent();
 	
-	void init();
+	virtual void init();
 	ScreenComponent(int startX, int startY, int width, int height);
-	void init(int startX, int startY,int width, int height);
+	virtual void init(int startX, int startY,int width, int height); // different names but ok
 	~ScreenComponent();
 	int getWidth();
 	int getHeight();

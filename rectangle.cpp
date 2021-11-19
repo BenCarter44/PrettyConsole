@@ -16,6 +16,7 @@ Rectangle2D::Rectangle2D(int startX, int startY, int w, int h) : ScreenComponent
 void Rectangle2D::init(int startX, int startY, int w, int h)
 {
 	ScreenComponent::init(startX, startY, w,h);
+
 }
 
 Rectangle2D::~Rectangle2D()
