@@ -40,7 +40,7 @@ public:
 	int getHeight();
 	int getAnchorX();
 	int getAnchorY();
-	virtual void setFill(Style& s, bool invisible) = 0;
+	void setFill(Style& s);
 	bool getAffected(int x, int y);
 	Style* getStyleSpecific(int x, int y);
 	unsigned char getChar(int x, int y);

@@ -192,7 +192,7 @@ void Console::addShape(ScreenComponent* sc)
 	int sy = sc->getAnchorY();
 	int lenX = sc->getWidth();
 	int lenY = sc->getHeight();
-
+	
 	for (int countY = 0; countY < lenY; countY++)
 	{
 		for (int countX = 0; countX < lenX; countX++)

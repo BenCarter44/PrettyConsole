@@ -48,7 +48,7 @@ void ScreenComponent::init(int startX, int startY, int width, int height)
 {
 	anchorX = startX;
 	anchorY = startY;
-	for (int y = 0; y < height; y++)
+	for (int y = 0; y < this->height; y++)
 	{
 		delete[] affected[y];
 		delete[] rowContent[y];
@@ -59,7 +59,7 @@ void ScreenComponent::init(int startX, int startY, int width, int height)
 	this->height = height;
 	affected = new bool* [height];
 	rowContent = new unsigned char* [height];
-	styles = new Style * [height];
+	styles = new Style* [height];
 
 	for (int x = 0; x < height; x++)
 	{
@@ -122,4 +122,17 @@ unsigned char ScreenComponent::getChar(int x, int y)
 		return rowContent[y][x];
 	}
 	return '#';
+}
+void ScreenComponent::setFill(Style& s)
+{
+	for (int x = 0; x < width; x++)
+	{
+		for (int y = 0; y < height; y++)
+		{
+			if (affected[y][x])
+			{
+				styles[y][x].init(s);
+			}
+		}
+	}
 }

@@ -4,6 +4,10 @@
 #include "screenComponent.h"
 #include "styles.h"
 #include "console.h"
+
+#include <iostream>
+using namespace std;
+
 class Line2D : public ScreenComponent
 {
 private:
@@ -16,7 +20,6 @@ public:
 	Line2D(int startX, int startY, int endX, int endY);
 	void init(int startX, int startY, int endX, int endY);
 	~Line2D();
-	void setFill(Style& s, bool invisible);
 
 };
 

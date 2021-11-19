@@ -4,6 +4,7 @@
 #include "PrettyConsole.h"
 #include "console.h"
 #include "rectangle.h"
+#include "line.h"
 
 #include <chrono>
 #include <thread>// sleep!
@@ -41,20 +42,39 @@ int main()
 	c.screenTest();
 	c.render();
 	sleep_for(milliseconds(1000));
-	Rectangle2D* rc = new Rectangle2D(1,1,20,4);
+	Rectangle2D* rc = new Rectangle2D(0,0,20,4);
 	Style newStyle = Style();
 	newStyle.setBackgroundColor(0, 0, 0);
-	rc->setFill(newStyle, false);
+	rc->setFill(newStyle);
 	c.addShape(rc);
 	c.smartRender();
 	sleep_for(milliseconds(1000));
 	Rectangle2D* rc2 = new Rectangle2D(15, 3, 35, 4);
 	newStyle.init();
 	newStyle.setBackgroundColor(255, 255, 255);
-	rc2->setFill(newStyle, false);
+	rc2->setFill(newStyle);
 	c.addShape(rc2);
+	c.smartRender();
+	sleep_for(milliseconds(1000));
+	Style borderStyle;
+	borderStyle.setBackgroundColor(255, 0, 0);
+	Rectangle2D* rc3 = new Rectangle2D(12, 7, 12, 4);
+	rc3->setBorder(borderStyle);
+	rc3->setFill(newStyle);
+	c.addShape(rc3);
 
 	c.smartRender();
+
+	Line2D* ln1 = new Line2D(0, 0, 0,c.getHeight()-1);
+	ln1->setFill(borderStyle);
+
+	c.addShape(ln1);
+
+	c.smartRender();
+
+	c.putString("Test", 0, 0);
+	c.smartRender();
+
 	getchar();
 
 	return 0;

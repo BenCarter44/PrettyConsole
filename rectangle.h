@@ -18,7 +18,7 @@ public:
 	Rectangle2D(int startX, int startY,int w, int h);
 	void init(int startX, int startY, int w, int h);
 	~Rectangle2D();
-	void setFill(Style& s,bool invisible);
+	virtual void setFill(Style& s); // override the function in rectangle
 	void setBorder(Style& s);
 	void removeBorder();
 	
