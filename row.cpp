@@ -169,7 +169,7 @@ string Row::getRenderResult()
 }
 void Row::setChar(unsigned char c, int i)
 {
-	if (i < width && i > 0)
+	if (i < width && i >= 0)
 	{
 		isRender = false;
 		rowContent[i] = c;
@@ -177,7 +177,7 @@ void Row::setChar(unsigned char c, int i)
 }
 void Row::setStyle(Style& s, int i)
 {
-	if (i < width && i > 0)
+	if (i < width && i >= 0)
 	{
 		isRender = false;
 		styles[i].init(s);

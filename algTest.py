@@ -39,7 +39,7 @@ def calcLine(startX, startY, endX, endY,affected):
             y = int(y)
             affected[y + anchorY][x + anchorX] = 1
     else:
-        slope = int(slopeX * 100 / slopeY)  
+        slope = int(slopeX * 100 / slopeY)      
         affected[anchorY][anchorX] = 1
         affected[endY][endX] = 1
         print(width)
