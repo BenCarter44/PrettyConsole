@@ -4,6 +4,7 @@
 
 #if defined(_WIN32) || defined(WIN32)
 #include <windows.h>
+
 #else
 #include <sys/ioctl.h>
 #define LINUX 1
@@ -21,12 +22,14 @@ private:
 	bool resize;
 	int height;
 	int width;
-	
+	bool support;
 
 public:
 	void render();
 	Console();
+	Console(string t);
 	void init();
+	void init(string t);
 	void fillScreen();
 	void clear();
 	void putString(string data, int x, int y);
@@ -41,6 +44,11 @@ public:
 	{
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
+	bool getSupport()
+	{
+		return support;
+	}
+	void setTitle(string title);
 };
 
 

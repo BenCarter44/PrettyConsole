@@ -22,6 +22,14 @@ int main()
 
 	//
 	Console c = Console();
+	if (!c.getSupport())
+	{
+		cout << "Display not supported! Press enter to quit... ";
+		getchar();
+		return 0;
+	}
+
+
 
 	/*int height = c.getHeight();
 	int width = c.getWidth();
