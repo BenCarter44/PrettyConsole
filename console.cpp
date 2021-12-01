@@ -6,11 +6,80 @@ Console::Console()
 {
 	init();
 }
+Console::Console(string t)
+{
+	init();
+	if (getSupport())
+	{
+		setTitle(t);
+	}
+}
+void Console::init(string t)
+{
+	init();
+	if (getSupport())
+	{
+		setTitle(t);
+	}
+}
+void Console::setTitle(string title)
+{
+	cout << "\033]0;" + title + '\x07';
+}
 void Console::init()
 {
 	// get size of window
+	// https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences?redirectedfrom=MSDN
 
 #ifndef LINUX
+	support = true;
+	  // Set output mode to handle virtual terminal sequences
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (hOut == INVALID_HANDLE_VALUE)
+	{
+		support = false;
+	}
+	HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+	if (hIn == INVALID_HANDLE_VALUE)
+	{
+		support = false;
+	}
+
+	DWORD dwOriginalOutMode = 0;
+	DWORD dwOriginalInMode = 0;
+	if (!GetConsoleMode(hOut, &dwOriginalOutMode))
+	{
+		support = false;
+	}
+	if (!GetConsoleMode(hIn, &dwOriginalInMode))
+	{
+		support = false;
+	}
+
+	DWORD dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
+	DWORD dwRequestedInModes = ENABLE_VIRTUAL_TERMINAL_INPUT;
+
+	DWORD dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+	if (!SetConsoleMode(hOut, dwOutMode))
+	{
+		// we failed to set both modes, try to step down mode gracefully.
+		dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+		dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+		if (!SetConsoleMode(hOut, dwOutMode))
+		{
+			// Failed to set any VT mode, can't do anything here.
+			support = false;
+		}
+	}
+
+	DWORD dwInMode = dwOriginalInMode | ENABLE_VIRTUAL_TERMINAL_INPUT;
+	if (!SetConsoleMode(hIn, dwInMode))
+	{
+		// Failed to set VT input mode, can't do anything here.
+		support = false;
+	}
+
+	
 
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	int columns, r;
@@ -185,4 +254,23 @@ int Console::getHeight() const
 int Console::getWidth() const
 {
 	return width;
+}
+void Console::addShape(ScreenComponent* sc)
+{
+	int sx = sc->getAnchorX();
+	int sy = sc->getAnchorY();
+	int lenX = sc->getWidth();
+	int lenY = sc->getHeight();
+	
+	for (int countY = 0; countY < lenY; countY++)
+	{
+		for (int countX = 0; countX < lenX; countX++)
+		{
+			if (sc->getAffected(countX, countY))
+			{
+				rows[countY + sy].setChar(sc->getChar(countX, countY),countX+sx);
+				rows[countY + sy].setStyle(*(sc->getStyleSpecific(countX, countY)), countX + sx);
+			}
+		}
+	}
 }
