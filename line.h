@@ -3,7 +3,6 @@
 
 #include "screenComponent.h"
 #include "styles.h"
-#include "console.h"
 
 #include <iostream>
 using namespace std;

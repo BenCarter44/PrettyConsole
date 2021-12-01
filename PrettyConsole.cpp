@@ -5,6 +5,7 @@
 #include "console.h"
 #include "rectangle.h"
 #include "line.h"
+#include "point.h"
 
 #include <chrono>
 #include <thread>// sleep!
@@ -74,7 +75,7 @@ int main()
 	c.addShape(rc3);
 
 	c.smartRender();
-	
+	/*
 	for (int pos = 0; pos < c.getWidth() + c.getHeight() - 1; pos++)
 	{
 		int startY = 0;
@@ -106,10 +107,19 @@ int main()
 		c.smartRender();
 		sleep_for(milliseconds(100));
 	}
-	
-	
+	*/
+	Point2D* p = new Point2D(c.getWidth() / 2, c.getHeight() / 2);
+	newStyle.init();
+	newStyle.setBackgroundColor(0, 10, 255);
+	newStyle.setTextColor(255, 255, 0);
+	p->setFill(newStyle);
+	p->putChar('*');
+	c.addShape(p);
 
-	//c.smartRender();
+	p->init(5, 5);
+	c.addShape(p);
+
+	c.smartRender();
 	
 	getchar();
 
