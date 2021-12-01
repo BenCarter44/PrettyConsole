@@ -46,5 +46,5 @@ public:
 	unsigned char getChar(int x, int y);
 };
 
-
+#endif
 
