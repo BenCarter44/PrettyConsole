@@ -15,6 +15,7 @@ using namespace std::chrono;
 using namespace std;
 // https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 // http://ndpsoftware.com/git-cheatsheet.html#loc=index;
+#ifndef STOP_TEST
 int main()
 {
 	using namespace std::this_thread; // sleep_for, sleep_until
@@ -142,5 +143,5 @@ int main()
 
 
 }
-
+#endif
 
