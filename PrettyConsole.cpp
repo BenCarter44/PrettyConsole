@@ -74,7 +74,7 @@ int main()
 	c.addShape(rc3);
 
 	c.smartRender();
-
+	
 	for (int pos = 0; pos < c.getWidth() + c.getHeight() - 1; pos++)
 	{
 		int startY = 0;
@@ -104,16 +104,29 @@ int main()
 		c.putString("End Y: " + to_string(endY) + "  ", 0, 3);
 
 		c.smartRender();
-		//sleep_for(milliseconds(100));
+		sleep_for(milliseconds(100));
 	}
 	
-
 	
-	//c.smartRender();
 
+	//c.smartRender();
+	
 	getchar();
 
 	return 0;
+
+
+	/*
+	Coupling:
+
+	Loose Coupling is when if you change 1 class, you don't need to change the implementation of other classes
+
+	Tight Coupling is when you change 1 class, you need to change other classes to make it work.
+
+	Loose coupling is recommended.
+	
+	
+	*/
 	
 	
 

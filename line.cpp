@@ -115,9 +115,10 @@ void Line2D::init(int startX, int startY, int endX, int endY)
 		}
 		bool flip = slope >= 0;
 		slope = abs(slope);
+		
 		for (int y = 0; y < height - 1; y++)
 		{
-
+			//Console::mapValue(y, 0, height - 1, )
 			int x = 0;
 			if ((slope * y) % 100 > 60)
 			{
@@ -134,10 +135,11 @@ void Line2D::init(int startX, int startY, int endX, int endY)
 
 			if (!flip)
 			{
-				x = width- x;
+				x = width- x - 1;
 			}
+			//cout << x << endl;
 			affected[y][x] = 1;
-			rowContent[y][x] = ' ';
+			rowContent[y][x] = ' '; //to_string(x).at(0);
 		}
 	}
 }
