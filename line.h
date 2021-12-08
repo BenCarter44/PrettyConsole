@@ -1,5 +1,5 @@
 #ifndef LINE_H
-#define RECTH_H
+#define LINE_H
 
 #include "screenComponent.h"
 #include "styles.h"
