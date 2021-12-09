@@ -27,3 +27,7 @@ void Point2D::putChar(char c)
 {
 	rowContent[0][0] = c;
 }
+unsigned char Point2D::getChar()
+{
+	return rowContent[0][0];
+}
