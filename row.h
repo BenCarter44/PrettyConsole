@@ -25,7 +25,7 @@ public:
 	void init(int len);
 	~Row();
 	string getStyle(int i);
-	char getCharacter(int i)
+	unsigned char getCharacter(int i)
 	{
 		return rowContent[i];
 	}
@@ -39,7 +39,7 @@ public:
 	void setChar(unsigned char c, int i);
 	void setStyle(Style& s, int i);
 	string getRenderResult();
-
+	Style getStyleObj(int i);
 };
 
 #endif

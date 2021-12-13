@@ -88,10 +88,13 @@ string Row::getStyle(int i)
 
 	return styles[i].getASCII();
 }
+Style Row::getStyleObj(int i)
+{
+	return styles[i];
+}
 void Row::setStyle(int i,Style s)
 {
-	isRender = false;
-	styles[i].init(s);
+	setStyle(s, i);
 }
 void Row::setRowStyle(Style s)
 {

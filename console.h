@@ -49,6 +49,8 @@ public:
 		return support;
 	}
 	void setTitle(string title);
+	Style getSpecificStyle(int x, int y);
+	unsigned char getSpecificChar(int x, int y);
 };
 
 

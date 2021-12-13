@@ -274,3 +274,12 @@ void Console::addShape(ScreenComponent* sc)
 		}
 	}
 }
+
+Style Console::getSpecificStyle(int x, int y)
+{
+	return rows[y].getStyleObj(x);
+}
+unsigned char Console::getSpecificChar(int x, int y)
+{
+	return rows[y].getCharacter(x);
+}
