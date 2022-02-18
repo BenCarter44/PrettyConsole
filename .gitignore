@@ -14,8 +14,11 @@
 *.userprefs
 
 CMakeFiles/
-
-
+CMake*
+*.cmake
+MakeFile
+!CMakeLists.txt
+!CMakeSettings.json
 
 # Mono auto generated files
 mono_crash.*
