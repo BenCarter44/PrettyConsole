@@ -122,8 +122,7 @@ int main()
 
 	c.smartRender();
 	
-	this_thread::sleep_for(chrono::milliseconds(20000));
-	//getchar();
+	getchar();
 
 	return 0;
 

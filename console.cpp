@@ -100,7 +100,6 @@ void Console::init()
 
 	height = w.ws_row;
 	width = w.ws_col;
-	support = true;
 #endif
 	//cout << height << '\n';
 	//cout << width << '\n';

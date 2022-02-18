@@ -13,8 +13,14 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-CMakeFiles/
 
+
+CMakeFiles/
+CMake*
+*.cmake
+MakeFile
+!CMakeLists.txt
+!CMakeSettings.json
 
 
 # Mono auto generated files
