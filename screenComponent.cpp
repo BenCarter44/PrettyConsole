@@ -112,8 +112,8 @@ Style* ScreenComponent::getStyleSpecific(int x, int y)
 	{
 		return &(styles[y][x]);
 	}
-	Style s = Style();
-	return &s;
+	Style* s = new Style;
+	return s;
 }
 unsigned char ScreenComponent::getChar(int x, int y)
 {
