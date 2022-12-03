@@ -76,7 +76,7 @@ int main()
 	c.addShape(rc3);
 
 	c.smartRender();
-	/*
+	
 	for (int pos = 0; pos < c.getWidth() + c.getHeight() - 1; pos++)
 	{
 		int startY = 0;
@@ -106,9 +106,9 @@ int main()
 		c.putString("End Y: " + to_string(endY) + "  ", 0, 3);
 
 		c.smartRender();
-		sleep_for(milliseconds(100));
+	//	sleep_for(milliseconds(100));
 	}
-	*/
+	
 	Point2D* p = new Point2D(c.getWidth() / 2, c.getHeight() / 2);
 	newStyle.init();
 	newStyle.setBackgroundColor(0, 10, 255);
