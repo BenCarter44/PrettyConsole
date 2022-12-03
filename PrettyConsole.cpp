@@ -15,6 +15,10 @@ using namespace std::chrono;
 using namespace std;
 // https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 // http://ndpsoftware.com/git-cheatsheet.html#loc=index;
+// https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+
+#define STOP_TEST
+
 #ifndef STOP_TEST
 int main()
 {

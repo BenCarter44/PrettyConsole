@@ -1,12 +1,12 @@
 #include "console.h"
 #include <iostream>
-using namespace std;
+
 
 Console::Console()
 {
 	init();
 }
-Console::Console(string t)
+Console::Console(MyString t)
 {
 	init();
 	if (getSupport())
@@ -14,7 +14,7 @@ Console::Console(string t)
 		setTitle(t);
 	}
 }
-void Console::init(string t)
+void Console::init(MyString t)
 {
 	init();
 	if (getSupport())
@@ -22,9 +22,9 @@ void Console::init(string t)
 		setTitle(t);
 	}
 }
-void Console::setTitle(string title)
+void Console::setTitle(MyString title)
 {
-	cout << "\033]0;" + title + '\x07';
+	std::cout << "\033]0;" + title + '\x07';
 }
 void Console::init()
 {
@@ -119,12 +119,12 @@ void Console::init()
 
 
 }
-string Console::stringRender()
+MyString Console::stringRender()
 {
-	string out;
+	MyString out;
 	for (int y = 0; y < height;y++)
 	{
-		string previous = "";
+		MyString previous = "";
 
 		for (int x = 0; x < width; x++)
 		{
@@ -155,8 +155,8 @@ void Console::render() // redo the entire screen
 	//cout << rows[0].getCharacter(0);
 	
 	//cout << "\033[2J"; // clears the whole screen and sets cursor to (0,0) \\033[<L>;<C>H
-	cout << "\033[0;0f";
-	cout << stringRender(); 
+	std::cout << "\033[0;0f";
+	std::cout << stringRender(); 
 	//cout << 
 	/*
 	for (int y = 0; y < height; y++)
@@ -185,9 +185,9 @@ void Console::smartRender()
 			}
 			count++;*/
 			rows[y].renderLine();
-			string s = "\033[" + to_string(y+1) + ";0f";
+			MyString s = MyString("\033[") + std::to_string(y+1).c_str() + ";0f";
 
-			cout << s << rows[y].getRenderResult();
+			std::cout << s << rows[y].getRenderResult();
 		}
 		
 	}
@@ -216,7 +216,7 @@ void Console::clear()
 	
 
 }
-void Console::putString(string data, int x, int y)
+void Console::putString(MyString data, int x, int y)
 {
 	rows[y].putString(data, x);
 	/*if (y < height - 1)
@@ -224,7 +224,7 @@ void Console::putString(string data, int x, int y)
 		cout << "H: " << rows[y + 1].getRenderState();
 	} */
 }
-void Console::putString(string data, int x, int y,Style s)
+void Console::putString(MyString data, int x, int y,Style s)
 {
 	rows[y].putString(data, x, s);
 }

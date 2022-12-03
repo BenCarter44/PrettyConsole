@@ -3,8 +3,9 @@
 
 #include "screenComponent.h"
 #include "styles.h"
+#include "console.h"
 
-class Rectangle2D : public ScreenComponent
+class DLLHEADER Rectangle2D : public ScreenComponent
 {
 private:
 	Style border;

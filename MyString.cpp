@@ -119,6 +119,35 @@ MyString MyString::operator+(const MyString& s) const // concat two strings Big-
 	}
 	return theNewString;
 }
+MyString MyString::operator+=(const MyString& s) const // concat two strings Big-O: O(n)
+{
+	MyString theNewString;
+	theNewString.ensureCapacity(s.lenArray + lenArray); // check to see if the newString can handle it.
+	theNewString.currLength = s.currLength + currLength;
+	for (unsigned int i = 0; i < currLength; i++)
+	{
+		theNewString.theArray[i] = theArray[i];   // add the first string letter by letter
+	}
+	for (unsigned int i = 0; i < s.currLength; i++)
+	{
+		theNewString.theArray[i + currLength] = s.theArray[i]; // add the second string letter by letter
+	}
+	return theNewString;
+}
+MyString MyString::operator+=(const char c) const // concat two strings Big-O: O(n)
+{
+	MyString theNewString;
+	theNewString.ensureCapacity(1 + lenArray); // check to see if the newString can handle it.
+	theNewString.currLength = 1 + currLength;
+	for (unsigned int i = 0; i < currLength; i++)
+	{
+		theNewString.theArray[i] = theArray[i];   // add the first string letter by letter
+	}
+	
+		theNewString.theArray[1 + currLength] = c; // add the second string letter by letter
+	
+	return theNewString;
+}
 unsigned int MyString::length() const // Big-O: O(1)
 {
 	return currLength;
@@ -141,6 +170,10 @@ bool MyString::operator==(const MyString& s) const // checks to see if string is
 		}
 	}
 	return true;
+}
+bool MyString::operator!=(const MyString& s) const // checks to see if string is equal. Big-O: O(n)
+{
+	return !operator==(s);
 }
 bool MyString::operator<(const MyString& s) const // checks to see if a string is greater than a certain word. Big-O: O(n)
 {
@@ -270,13 +303,13 @@ MyString MyString::substring(unsigned int start,unsigned int end) const // same,
 {
 	MyString theNewString;
 	theNewString.ensureCapacity(lenArray);
-	theNewString.currLength = end - start;
+	theNewString.currLength = end; //    change to actual C++ ways.  end - start;
 
 	// 0,1,2,3,4,5  currLen: 6, start: 2  end 4
 
 
 	int j = 0;
-	for (unsigned int i = start; i < end; i++)
+	for (unsigned int i = start; i < start + theNewString.currLength; i++)
 	{
 		theNewString.theArray[j] = theArray[i];
 		j++;

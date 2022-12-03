@@ -17,8 +17,8 @@ The console class will write the shape to the rows.
 #ifndef SCREENCOMP
 #define SCREENCOMP
 #include "styles.h"
-
-class ScreenComponent
+#include "console.h"
+class DLLHEADER ScreenComponent
 {
 
 protected:

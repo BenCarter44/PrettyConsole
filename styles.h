@@ -4,10 +4,12 @@
 #include <string>
 #include "styleAttribute.h"
 #include <vector>
+#include "console.h"
+#include "MyString.h"
 
-using namespace std;
 
-class Style
+
+class DLLHEADER Style
 {
 private:
 	StyleAttribute textColor;
@@ -28,7 +30,7 @@ public:
 	{
 		
 	}
-	string getASCII() const;
+	MyString getASCII() const;
 	void setTextColor(int r, int g, int b);
 	void setTextColor(int set);
 	void setBackgroundColor(int r, int g, int b);

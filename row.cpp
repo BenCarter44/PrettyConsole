@@ -4,7 +4,6 @@
 #include <iostream>
 
 
-using namespace std;
 
 Row::Row()
 {
@@ -83,7 +82,7 @@ void Row::setLen(int len)
 	width = len;
 
 }
-string Row::getStyle(int i)
+MyString Row::getStyle(int i)
 {
 
 	return styles[i].getASCII();
@@ -113,24 +112,24 @@ void Row::spaceFill()
 		rowContent[x] = ' ';
 	}
 }
-void Row::putString(string s, int start)
+void Row::putString(MyString s, int start)
 {
 	isRender = false;
 	if (start + s.length() > width)
 	{
-		s = s.substr(0, width - start);
+		s = s.substring(0, width - start);
 	}
 	for (int x = 0; x < s.length(); x++)
 	{
 		rowContent[x + start] = s.at(x);
 	}
 }
-void Row::putString(string s, int start, Style sty)
+void Row::putString(MyString s, int start, Style sty)
 {
 	isRender = false;
 	if (start + s.length() > width)
 	{
-		s = s.substr(0, width - start);
+		s = s.substring(0, width - start);
 	}
 	for (int x = 0; x < s.length(); x++)
 	{
@@ -141,8 +140,8 @@ void Row::putString(string s, int start, Style sty)
 void Row::renderLine()
 {
 	isRender = true;
-	string out = "";
-	string previous = "";
+	MyString out = "";
+	MyString previous = "";
 
 	for (int x = 0; x < width; x++)
 	{
@@ -165,7 +164,7 @@ bool Row::getRenderState()
 {
 	return isRender;
 }
-string Row::getRenderResult()
+MyString Row::getRenderResult()
 {
 	
 	return renderString;

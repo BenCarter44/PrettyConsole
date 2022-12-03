@@ -1,6 +1,6 @@
 #include "styleAttribute.h"
 #include <iostream>
-using namespace std;
+
 
 //int StyleAttribute::testNumber = 0;
 

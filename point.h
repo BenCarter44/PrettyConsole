@@ -2,8 +2,9 @@
 #define POINTH_H
 
 #include "screenComponent.h"
+#include "console.h"
 
-class Point2D : public ScreenComponent
+class DLLHEADER Point2D : public ScreenComponent
 {
 public:
 	Point2D(int x, int y);

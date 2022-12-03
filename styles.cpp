@@ -2,7 +2,6 @@
 #include <iostream>
 #include "styles.h"
 
-using namespace std;
 
 void Style::init()
 {
@@ -102,12 +101,12 @@ Style::Style(const Style& cp)
 {
 	init(cp);
 }
-string Style::getASCII() const
+MyString Style::getASCII() const
 {
-	string start = "\033[";
+	MyString start = "\033[";
 	if (reset)
 	{
-		start += "0;";
+		start = start + "0;";
 	}
 	
 	if (textWeight.isSet()) // bold, italic, or underline, or both
@@ -115,42 +114,42 @@ string Style::getASCII() const
 		int val = textWeight.getValue();
 		if (val % 2 == 0) // if even, it is bold
 		{
-			start += "1;";
+			start = start + "1;";
 		}
 		else
 		{
-			start += "22;";
+			start = start + "22;";
 		}
 		if (val % 7 == 0) // italic
 		{
-			start += "3;";
+			start = start + "3;";
 		}
 		else
 		{
-			start += "23;";
+			start = start + "23;";
 		}
 		if (val % 3 == 0) // underline
 		{
-			start += "4;";
+			start = start + "4;";
 		}
 		else
 		{
-			start += "24;";
+			start = start + "24;";
 		}
 	}
 	if (isBlink.isSet())
 	{
 		if (isBlink.getValue() == 1)
 		{
-			start += "5;";
+			start = start + "5;";
 		}
 		else if (isBlink.getValue() == 2)
 		{
-			start += "6;";
+			start = start + "6;";
 		}
 		else if (isBlink.getValue() == 0)
 		{
-			start += "25;";
+			start = start + "25;";
 		}
 
 	}
@@ -158,15 +157,15 @@ string Style::getASCII() const
 	{
 		if (border.getValue() == 1)
 		{
-			start += "51;";
+			start = start + "51;";
 		}
 		else if (border.getValue() == 2)
 		{
-			start += "52;";
+			start = start + "52;";
 		}
 		else
 		{
-			start += "54;";
+			start = start + "54;";
 		}
 	}
 	if (textColor.isArrOK())
@@ -176,16 +175,16 @@ string Style::getASCII() const
 		int g = textColor.getValueArr()[1];
 		int b = textColor.getValueArr()[2];
 		/*cout << r << " " << g << " " << b << '\n';*/
-		start += "38;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + ";";
+		start = start + "38;2;" + std::to_string(r).c_str() + ";" + std::to_string(g).c_str() + ";" + std::to_string(b).c_str() + ";";
 	}
 	if (backgroundColor.isArrOK())
 	{
 		int r = backgroundColor.getValueArr()[0];
 		int g = backgroundColor.getValueArr()[1];
 		int b = backgroundColor.getValueArr()[2];
-		start += "48;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + ";";
+		start = start + "48;2;" + std::to_string(r).c_str() + ";" + std::to_string(g).c_str() + ";" + std::to_string(b).c_str() + ";";
 	}
-	start = start.substr(0, start.length() - 1) + "m";
+	start = start.substring(0, start.length() - 1) + "m";
 	//cout << start << '\n';
 	return start;
 

@@ -29,10 +29,13 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const MyString& dt); // runs if you do cout << foo. foo.operator(foo) 
 	
 	MyString operator+(const MyString &s) const; // concat two strings
+	MyString operator+=(const MyString& s) const;
+	MyString operator+=(const char c) const;
 //	void show() const; // disp to console
 	unsigned int length() const; // find the length of the string
 	MyString concat(const MyString &s) const; // also concat
 	bool operator==(const MyString &s) const; // isEqual
+	bool operator!=(const MyString& s) const;
 	bool operator<(const MyString &s) const; // is less than, is greater than. Order of word in dictionary
 	bool operator>(const MyString &s) const;
 	unsigned int* lexIndex() const; // a helper method that the operator< and > use. Calculates the letter index for each letter in a MyString

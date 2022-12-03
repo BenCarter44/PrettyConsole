@@ -1,10 +1,11 @@
 #ifndef ROW_H
 #define ROW_H
 #include "styles.h"
+#include "console.h"
+#include "MyString.h"
 
-using namespace std;
 
-class Row
+class DLLHEADER Row
 {
 private:
 	unsigned char* rowContent; // same as byte
@@ -13,7 +14,7 @@ private:
 	bool isProper = false;
 	bool isRender = false;
 	
-	string renderString = "";
+	MyString renderString = "";
 
 public:
 	void renderLine();
@@ -24,21 +25,21 @@ public:
 	Row(int len);
 	void init(int len);
 	~Row();
-	string getStyle(int i);
+	MyString getStyle(int i);
 	unsigned char getCharacter(int i)
 	{
 		return rowContent[i];
 	}
 	void spaceFill();
-	void putString(string s, int start);
-	void putString(string s, int start, Style sty);
+	void putString(MyString s, int start);
+	void putString(MyString s, int start, Style sty);
 	void setStyle(int i, Style s);
 	void setRowStyle(Style s);
 	void setRender(bool r);
 	bool getRenderState();
 	void setChar(unsigned char c, int i);
 	void setStyle(Style& s, int i);
-	string getRenderResult();
+	MyString getRenderResult();
 	Style getStyleObj(int i);
 };
 

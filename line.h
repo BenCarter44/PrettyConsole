@@ -3,11 +3,12 @@
 
 #include "screenComponent.h"
 #include "styles.h"
+#include "console.h"
 
 #include <iostream>
-using namespace std;
 
-class Line2D : public ScreenComponent
+
+class DLLHEADER Line2D : public ScreenComponent
 {
 private:
 	Style fill;

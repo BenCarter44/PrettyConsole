@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\row.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\styles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\styleAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\screenComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\rectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\PrettyConsole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\row.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\styles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\styleAttribute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\screenComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\rectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\BenCarter\Documents\Bens Work\Coding\C++\PrettyConsole\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{30360193-1493-36CE-ACFC-5E9CDF925F78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A5FF8732-4199-3ADD-B337-BF626F3DD9FF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -21,6 +21,7 @@ CMake*
 MakeFile
 !CMakeLists.txt
 !CMakeSettings.json
+msBuild/
 
 
 # Mono auto generated files

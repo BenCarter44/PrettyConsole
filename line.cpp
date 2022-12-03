@@ -1,6 +1,6 @@
 #include "line.h"
 
-using namespace std;
+
 
 Line2D::Line2D() : ScreenComponent()
 {

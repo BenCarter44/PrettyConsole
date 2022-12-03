@@ -1,9 +1,9 @@
 #ifndef STYLEATTRIB_H
 #define STYLEATTRIB_H 1
 #define INVALID_STYLE -1404;
+#include "console.h"
 
-
-class StyleAttribute
+class DLLHEADER StyleAttribute
 {
 private: 
 	bool isGood;
