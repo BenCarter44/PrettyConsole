@@ -58,7 +58,7 @@ int main()
 	ifstream pyInput("transfer.toc");
 	int inWidth;
 	int inHeight;
-	int styleAmount;
+	int styleAmount;     // NOTE. THIS IS NOT SECURE.... BUT, I'M IGNORING IT FOR NOW.... THIS WILL NEED TO GET FIXED BY INCLUDING ERROR CHECKING
 	pyInput >> inWidth;
 	pyInput >> inHeight;
 	pyInput >> styleAmount;
@@ -125,7 +125,7 @@ int main()
 			int textG;
 			int textB;
 			int backR;
-			int backG;
+			int backG; // NOTE. THIS IS NOT SECURE.... BUT, I'M IGNORING IT FOR NOW.... THIS WILL NEED TO GET FIXED BY INCLUDING ERROR CHECKING
 			int backB;
 			pyInput >> textNumber;
 			pyInput >> textR;
