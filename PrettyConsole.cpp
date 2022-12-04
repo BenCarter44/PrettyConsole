@@ -9,6 +9,9 @@
 
 #include <chrono>
 #include <thread>// sleep!
+
+#include <fstream>
+
 using namespace std::chrono;
 
 
@@ -30,9 +33,124 @@ int main()
 		getchar();
 		return 0;
 	}
+	cout << c.getHeight() << '\n';
+	cout << c.getWidth() << '\n';
+	
 
 
 
+
+	ifstream input("colorSimple.dat");
+	string charMap = "";
+	while (!input.eof())
+	{
+		char inc;
+		input.get(inc);
+		if (!input.eof())
+		{
+			charMap.push_back(inc);
+		}
+	}
+	//cout << "'" << charMap << "'";
+	input.close();
+
+#ifndef COLORR
+	ifstream pyInput("transfer.toc");
+	int inWidth;
+	int inHeight;
+	int styleAmount;
+	pyInput >> inWidth;
+	pyInput >> inHeight;
+	pyInput >> styleAmount;
+	if (inWidth != c.getWidth() || inHeight != c.getHeight())
+	{
+		cout << "Please run from BAT. The console sizes are different!";
+	}
+	c.clear();
+
+	// style def
+	
+	Style* styleDefinitions = new Style[styleAmount+2];
+	int divisor = 255 / (styleAmount);  // style = 5, so 5.  51 each.
+	for (int x = 0; x < (styleAmount); x++)
+	{
+		// 255 / (styleAmount-1) for each. if style = 6 
+		styleDefinitions[x].setBackgroundColor(x * divisor, x * divisor, x * divisor);
+		styleDefinitions[x].setTextColor((x+1) * divisor, (x+1) * divisor, (x+1) * divisor);
+	}
+	styleDefinitions[styleAmount].setBackgroundColor(255,255,255);
+	styleDefinitions[styleAmount].setTextColor(255, 0, 0);
+	styleDefinitions[styleAmount+1].setBackgroundColor(255, 255, 255);
+	styleDefinitions[styleAmount+1].setTextColor(0, 0, 0);
+
+	for (int y = 0; y < inHeight; y++)
+	{
+		for (int x = 0; x < inWidth; x++)
+		{
+			int textNumber;
+			int backColor;
+			pyInput >> textNumber;
+			pyInput >> backColor;
+			Point2D p = Point2D(x, y);
+			p.setFill(styleDefinitions[backColor]);
+			p.putChar(charMap[textNumber]);
+			c.addShape(&p); // & is the refrence to.
+			//pyInput
+		}
+		c.smartRender(); // render each line!
+	}
+	pyInput.close();
+
+#else
+	ifstream pyInput("transferCOLOR.toc");
+	int inWidth;
+	int inHeight;
+	pyInput >> inWidth;
+	pyInput >> inHeight;
+	if (inWidth != c.getWidth() || inHeight != c.getHeight())
+	{
+		cout << "Please run from BAT. The console sizes are different!";
+	}
+	c.clear();
+
+	// style def
+
+
+	for (int y = 0; y < inHeight; y++)
+	{
+		for (int x = 0; x < inWidth; x++)
+		{
+			int textNumber;
+			int textR;
+			int textG;
+			int textB;
+			int backR;
+			int backG;
+			int backB;
+			pyInput >> textNumber;
+			pyInput >> textR;
+			pyInput >> textG;
+			pyInput >> textB;
+			pyInput >> backR;
+			pyInput >> backG;
+			pyInput >> backB;
+			Point2D p = Point2D(x, y);
+
+			Style newStyle = Style();
+			newStyle.setTextColor(textR, textG, textB);
+			newStyle.setBackgroundColor(backR, backG, backB);
+
+			p.setFill(newStyle);
+			p.putChar(charMap[textNumber]);
+			c.addShape(&p); // & is the refrence to.
+			//pyInput
+		}
+		c.smartRender(); // render each line!
+	}
+	pyInput.close();
+
+
+#endif
 	/*int height = c.getHeight();
 	int width = c.getWidth();
 	cout << "Testing!\n";
@@ -48,81 +166,8 @@ int main()
 	cout << "\n\n\n";*/
 
 	
-	c.clear();
-	c.screenTest();
-	c.render();
-	sleep_for(milliseconds(1000));
-	Rectangle2D* rc = new Rectangle2D(0,0,20,4);
-	Style newStyle = Style();
-	newStyle.setBackgroundColor(0, 0, 0);
-	newStyle.setTextColor(255, 255, 255);
-	rc->setFill(newStyle);
-	c.addShape(rc);
-	c.smartRender();
-	sleep_for(milliseconds(1000));
-	Rectangle2D* rc2 = new Rectangle2D(15, 3, 35, 4);
-	newStyle.init();
-	newStyle.setBackgroundColor(255, 255, 255);
-	newStyle.setTextColor(0, 0, 0);
-	rc2->setFill(newStyle);
-	c.addShape(rc2);
-	c.smartRender();
-	sleep_for(milliseconds(1000));
-	Style borderStyle;
-	borderStyle.setBackgroundColor(255, 0, 0);
-	Rectangle2D* rc3 = new Rectangle2D(12, 7, 12, 4);
-	rc3->setBorder(borderStyle);
-	rc3->setFill(newStyle);
-	c.addShape(rc3);
-
-	c.smartRender();
-	
-	for (int pos = 0; pos < c.getWidth() + c.getHeight() - 1; pos++)
-	{
-		int startY = 0;
-		if (pos >= c.getWidth())
-		{
-			startY = pos - c.getWidth() + 1;
-		}
-		int startX = c.getWidth() - 1;
-		if (pos < c.getWidth())
-		{
-			startX = pos;
-		}
-		
-		int endY = c.getHeight() - startY - 1;
-
-		
-		int endX = c.getWidth() - startX - 1;
-		
-		
-		Line2D* ln1 = new Line2D(startX,startY,endX,endY);
-		ln1->setFill(borderStyle);
-
-		c.addShape(ln1);
-		c.putString("Start X: " + to_string(startX) + "  ", 0, 0);
-		c.putString("Start Y: " + to_string(startY) + "  ", 0, 1);
-		c.putString("End X: " + to_string(endX) + "  ", 0, 2);
-		c.putString("End Y: " + to_string(endY) + "  ", 0, 3);
-
-		c.smartRender();
-	//	sleep_for(milliseconds(100));
-	}
-	
-	Point2D* p = new Point2D(c.getWidth() / 2, c.getHeight() / 2);
-	newStyle.init();
-	newStyle.setBackgroundColor(0, 10, 255);
-	newStyle.setTextColor(255, 255, 0);
-	p->setFill(newStyle);
-	p->putChar('*');
-	c.addShape(p);
-
-	p->init(5, 5);
-	c.addShape(p);
-
-	c.smartRender();
-	
-	getchar();
+	//c.clear();
+	// go through each line in the file. Take c.getHeight
 
 	return 0;
 
