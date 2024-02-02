@@ -6,6 +6,7 @@
 #include "rectangle.h"
 #include "line.h"
 #include "point.h"
+#include "inputHandler.h"
 
 #include <chrono>
 #include <thread>// sleep!
@@ -22,7 +23,11 @@ int main()
 	using namespace std::chrono; 
 //	cout << "Hello CMake!!!." << endl;
 
-	//
+
+	InputHandler i;
+	i.startListening();
+	
+
 	Console c = Console();
 	if (!c.getSupport())
 	{
@@ -51,7 +56,13 @@ int main()
 	c.clear();
 	c.screenTest();
 	c.render();
-	sleep_for(milliseconds(1000));
+	while(true)
+	{
+		if(i.isAvailable() && i.read() == 'a')
+		{
+			break;
+		}
+	}
 	Rectangle2D* rc = new Rectangle2D(0,0,20,4);
 	Style newStyle = Style();
 	newStyle.setBackgroundColor(0, 0, 0);
@@ -59,7 +70,13 @@ int main()
 	rc->setFill(newStyle);
 	c.addShape(rc);
 	c.smartRender();
-	sleep_for(milliseconds(1000));
+	while(true)
+	{
+		if(i.isAvailable() && i.read() == 'a')
+		{
+			break;
+		}
+	}
 	Rectangle2D* rc2 = new Rectangle2D(15, 3, 35, 4);
 	newStyle.init();
 	newStyle.setBackgroundColor(255, 255, 255);
@@ -67,7 +84,13 @@ int main()
 	rc2->setFill(newStyle);
 	c.addShape(rc2);
 	c.smartRender();
-	sleep_for(milliseconds(1000));
+	while(true)
+	{
+		if(i.isAvailable() && i.read() == 'a')
+		{
+			break;
+		}
+	}
 	Style borderStyle;
 	borderStyle.setBackgroundColor(255, 0, 0);
 	Rectangle2D* rc3 = new Rectangle2D(12, 7, 12, 4);
@@ -122,7 +145,15 @@ int main()
 
 	c.smartRender();
 	
-	getchar();
+	while(true)
+	{
+		if(i.isAvailable() && i.read() == 'a')
+		{
+			break;
+		}
+	}
+	i.stopListening();
+	
 
 	return 0;
 
