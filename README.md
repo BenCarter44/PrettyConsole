@@ -11,8 +11,8 @@ One can "post" shapes to a canvas, and then render the canvas onto a console.
 
 Does a clean build:
 
-Run `build.bat` inside a Developer Command Prompt in Windows
-Run `build.sh` in a linux box. 
+- Run `build.bat` inside a Developer Command Prompt in Windows
+- gitRun `build.sh` in a linux box. 
 
 Calls cmake in the backend.
 
