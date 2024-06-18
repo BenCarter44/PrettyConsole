@@ -100,10 +100,11 @@ void Console::init()
 
 	height = w.ws_row;
 	width = w.ws_col;
+	support = true;
 #endif
 	//cout << height << '\n';
 	//cout << width << '\n';
-	height += 0;
+	// height += 0;
 	//width -= 1;
 
 	rows = new Row[height];
@@ -115,8 +116,6 @@ void Console::init()
 		rows[x].setLen(width);
 
 	}
-
-
 
 }
 string Console::stringRender()

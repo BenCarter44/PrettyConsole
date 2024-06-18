@@ -6,6 +6,7 @@
 #include "rectangle.h"
 #include "line.h"
 #include "point.h"
+#include "inputHandler.h"
 
 #include <chrono>
 #include <thread>// sleep!
@@ -15,14 +16,17 @@ using namespace std::chrono;
 using namespace std;
 // https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 // http://ndpsoftware.com/git-cheatsheet.html#loc=index;
-#ifndef STOP_TEST
+
 int main()
 {
 	using namespace std::this_thread; // sleep_for, sleep_until
 	using namespace std::chrono; 
 //	cout << "Hello CMake!!!." << endl;
 
-	//
+
+
+	
+
 	Console c = Console();
 	if (!c.getSupport())
 	{
@@ -31,7 +35,7 @@ int main()
 		return 0;
 	}
 
-
+	InputHandler keyboard;
 
 	/*int height = c.getHeight();
 	int width = c.getWidth();
@@ -49,25 +53,49 @@ int main()
 
 	
 	c.clear();
+	c.setTitle("Test");
 	c.screenTest();
 	c.render();
-	sleep_for(milliseconds(1000));
+
+	keyboard.startListening();
+	keyboard.clear();
+
+	while(true)
+	{
+		if(keyboard.isAvailable() && keyboard.read() == 'a')
+		{
+			break;
+		}
+	}
 	Rectangle2D* rc = new Rectangle2D(0,0,20,4);
 	Style newStyle = Style();
 	newStyle.setBackgroundColor(0, 0, 0);
 	newStyle.setTextColor(255, 255, 255);
 	rc->setFill(newStyle);
 	c.addShape(rc);
-	c.smartRender();
-	sleep_for(milliseconds(1000));
+	c.render();
+	while(true)
+	{
+		if(keyboard.isAvailable() && keyboard.read() == 'a')
+		{
+			break;
+		}
+	}
 	Rectangle2D* rc2 = new Rectangle2D(15, 3, 35, 4);
 	newStyle.init();
 	newStyle.setBackgroundColor(255, 255, 255);
 	newStyle.setTextColor(0, 0, 0);
 	rc2->setFill(newStyle);
 	c.addShape(rc2);
-	c.smartRender();
-	sleep_for(milliseconds(1000));
+	c.render();
+	while(true)
+	{
+		if(keyboard.isAvailable() && keyboard.read() == 'a')
+		{
+			break;
+		}
+	}
+	keyboard.stopListening();
 	Style borderStyle;
 	borderStyle.setBackgroundColor(255, 0, 0);
 	Rectangle2D* rc3 = new Rectangle2D(12, 7, 12, 4);
@@ -75,7 +103,7 @@ int main()
 	rc3->setFill(newStyle);
 	c.addShape(rc3);
 
-	c.smartRender();
+	c.render();
 	
 	for (int pos = 0; pos < c.getWidth() + c.getHeight() - 1; pos++)
 	{
@@ -105,24 +133,47 @@ int main()
 		c.putString("End X: " + to_string(endX) + "  ", 0, 2);
 		c.putString("End Y: " + to_string(endY) + "  ", 0, 3);
 
-		c.smartRender();
+		c.render();
 	//	sleep_for(milliseconds(100));
 	}
-	
+
 	Point2D* p = new Point2D(c.getWidth() / 2, c.getHeight() / 2);
 	newStyle.init();
-	newStyle.setBackgroundColor(0, 10, 255);
+	newStyle.setBackgroundColor(0, 255, 255);
 	newStyle.setTextColor(255, 255, 0);
 	p->setFill(newStyle);
 	p->putChar('*');
 	c.addShape(p);
 
-	p->init(5, 5);
-	c.addShape(p);
+	c.setTitle("GO");
+	c.render();
+	keyboard.startListening();
+	keyboard.clear();
 
-	c.smartRender();
+	while(true)
+	{
+		if(keyboard.isAvailable())
+		{
+			char inc = keyboard.read();
+			if(inc == 'a')
+			{
+				break;
+			}
+			else
+			{
+				Point2D* p = new Point2D(c.getWidth() / 2, c.getHeight() / 2);
+				newStyle.init();
+				newStyle.setBackgroundColor(0, 255, 0);
+				newStyle.setTextColor(255, 0, 0);
+				p->setFill(newStyle);
+				p->putChar(inc);
+				c.addShape(p);
+				c.render();
+			}
+		}
+	}
+	keyboard.stopListening();
 	
-	getchar();
 
 	return 0;
 
@@ -143,5 +194,4 @@ int main()
 
 
 }
-#endif
 

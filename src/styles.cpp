@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+
 void Style::init()
 {
 	reset = true;
@@ -31,7 +33,7 @@ Style::Style()
 //	cout << "apple2!\n";
 	backgroundColor.init();
 	//cout << "apple3!\n";
-	isBlink.init();
+	isBlink.init(0); // turn off blink by default
 	//cout << "apple6!\n";
 	border.init();
 	//cout << "HERE!\n";
@@ -138,22 +140,6 @@ string Style::getASCII() const
 			start += "24;";
 		}
 	}
-	if (isBlink.isSet())
-	{
-		if (isBlink.getValue() == 1)
-		{
-			start += "5;";
-		}
-		else if (isBlink.getValue() == 2)
-		{
-			start += "6;";
-		}
-		else if (isBlink.getValue() == 0)
-		{
-			start += "25;";
-		}
-
-	}
 	if (border.isSet())
 	{
 		if (border.getValue() == 1)
@@ -186,6 +172,24 @@ string Style::getASCII() const
 		start += "48;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + ";";
 	}
 	start = start.substr(0, start.length() - 1) + "m";
+
+	if (isBlink.isSet())
+	{
+		start += "\033[";
+		if (isBlink.getValue() == 1)
+		{
+			start += "?25h";
+		}
+		else if (isBlink.getValue() == 2)
+		{
+			start += "";
+		}
+		else if (isBlink.getValue() == 0)
+		{
+			start += "?25l";
+		}
+	}
+
 	//cout << start << '\n';
 	return start;
 
