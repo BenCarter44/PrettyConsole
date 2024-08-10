@@ -78,7 +78,7 @@ Easy peasy to create UIs and other graphics in the console now!
 Does a clean build:
 
 - Run `build.bat` inside a Developer Command Prompt in Windows
-- gitRun `build.sh` in a linux box. 
+- Run `build.sh` in a linux box. 
 
 Calls cmake in the backend.
 
